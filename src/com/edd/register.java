@@ -54,6 +54,7 @@ public class register extends HttpServlet {
 
 	public static final String MSG_AFFICHAGE_VISIBLE = "bg-success col-sm-12";
 	public static final String MSG_AFFICHAGE_HIDDEN = "hidden";
+	String teString;
 
 	Map<String, String> errors = new HashMap<String, String>();
 	Map<String, String> form = new HashMap<String, String>();
