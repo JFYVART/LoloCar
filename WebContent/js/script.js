@@ -47,7 +47,6 @@ function init() {
 	/*intialise le geocoder pour localiser les adresses */
 	geocoder = new google.maps.Geocoder();
 	
-	
 	// Géolocalisation
 	var infoWindow = new google.maps.InfoWindow({map: map});
 
