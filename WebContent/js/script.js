@@ -118,8 +118,6 @@ var Users = [
 ["Laurent Palmier", 43.533329, 1.23333, 1]
 ];
 
-
-
 function setMarkers(map) {
     // Adds markers to the map.
 
