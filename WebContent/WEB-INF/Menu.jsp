@@ -75,7 +75,8 @@ color:#5e91b2;
   					<li><a href="Index.jsp">Accueil</a></li>
   					<li><a href=<c:url value="/register"/>>Créer un compte</a></li>
   					<li><a href="#">Se connecter</a></li>
-  					<li><a href="ListUser.jsp">Recherche d'un covoiturage</a></li>
+  					<li><a href="ListUser.jsp">Contacter un utilisateur</a></li>
+  					<li><a href="ListCovoiturage.jsp">Rechercher / proposer un covoiturage</a></li>
 				</ul>
 			</div>	
 </body>

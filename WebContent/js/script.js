@@ -44,12 +44,12 @@ function initMap() {
 	
 	/* Affichage du trajet  */
 	calcRoute(directionsService, directionsDisplay);
-	document.getElementById('mode').addEventListener('change', function() {
+	/*vdocument.getElementById('mode').addEventListener('change', function() {
 		calcRoute(directionsService, directionsDisplay);
       });
 	
 	
-	/*var markerDep = new google.maps.Marker({
+	ar markerDep = new google.maps.Marker({
         position: depart,
         map: map
       });
@@ -96,7 +96,7 @@ function calcRoute(directionsService, directionsDisplay) {
 	var start = depart;
 	var end = arrivee;  
 	  
-	  var selectedMode = document.getElementById('mode').value;
+	  var selectedMode = "DRIVING";
 	  var request = {
 	      origin: start,
 	      destination: end,
@@ -115,9 +115,7 @@ function calcRoute(directionsService, directionsDisplay) {
 //Data for the markers consisting of a name, a LatLng and a zIndex for the
 //order in which these markers should display on top of each other.
 var Users = [
-['Laurent Palmier', 43.533329, 1.23333, 1],
-['Aucamville', 43.799999, 1.21667, 2],
-['Saint Orens', 43.716671, 0.9, 3]
+['Lolo', 43.533329, 1.23333, 1]
 ];
 
 

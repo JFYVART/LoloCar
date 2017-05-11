@@ -21,16 +21,21 @@
 
 
 
-.jumbotron{
-margin-left: 30px;
+.well{
+font-size:26px;
+color:#5e91b2;
 opacity:0.8;
 }
-
+.glyphicon-transfer {
+color:#5e91b2;
+}
 p{
 margin-left: 30px;
 color:#5e91b2;
 font-size: 8px;
 }
+
+
 </style>
 
 
@@ -41,34 +46,12 @@ font-size: 8px;
 				<div class="col-md-3">
 					<c:import url="/WEB-INF/Menu.jsp" />
 				</div>
-				<div class="col-md-9">	
-					<div>
-						<table>
-						<tr>
-							<td><b>Départ: </b></td>
-							<td><input type="text" id="adrDep" value="" style="width:300px;"></td>
-							<td><b>Transport: </b>
-							<select id="mode">
-							<option value="DRIVING">voiture</option>
-							<option value="WALKING">marche</option>
-							<option value="BICYCLING">vélo</option>
-							</select></td>
-						</tr>
-						<tr>
-							<td><b>Arrivée: </b></td>
-							<td><input type="text" id="adrArr" value="" style="width:300px;"></td>
-							<td><input type="button" value="Recherche" onclick="rechercher('adrDep','adrArr')"></td>
-						</tr>
-						</table>
-						<div class="col-md-6" id="divMap" style="float:left;width:600px; height:350px"></div>
-							<div class="col-md-6"id="divRoute" style="float:right;width:30%;height:80%"></div>
-							
-					</div>
+				<div class="col-md-9">
+					<div class="well">
 					
-					<br/>
-					<center>
-					</center>
-		  		</div>	
+					<h3><i class="glyphicon glyphicon-transfer"></i> Carte des covoiturages en cours</h3>
+					</div>	
+					<div class="col-md-6" id="divMap" style="float:left;width:845px; height:600px"></div>		
 	  		  </div>				
 		</form>
 	</div>
