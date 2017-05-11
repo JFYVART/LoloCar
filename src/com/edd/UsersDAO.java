@@ -85,15 +85,15 @@ public class UsersDAO {
 
 	}
 
-	public static HashMap<String, User> fillHashMapWithListUsers(String loginSearched){
+	public static HashMap<String, User> fillHashMapWithListUsers(String nameSearched){
 		HashMap<String, User> Users = new HashMap<String, User>();
 		if(listeUtilisateur.isEmpty()){
 			initListeUser();
 		}
 		for (User utilisateur : listeUtilisateur) {
 			System.out.println("parcours liste des utilisateurs pour remplissage HashMap");
-			if (!"".equals(loginSearched)){
-				if (utilisateur.getEmail().equalsIgnoreCase(loginSearched)) {
+			if (!"".equals(nameSearched)){
+				if (utilisateur.getName().equalsIgnoreCase(nameSearched)) {
 					Users.put(utilisateur.getEmail(), utilisateur);
 				}
 			} else {
