@@ -4,13 +4,14 @@ import java.util.Date;
 
 public class User {
 
+	private static final int RAYON = 10;
 	private String name;
 	private String password;
 	private String email;
 	private boolean fumeur;
 	private int nbCovoitureurs;
 	private Date dateCovoiturage;
-
+	private int rayon;
 
 	public User() {
 
@@ -23,6 +24,7 @@ public class User {
 		this.fumeur = fumeur;
 		this.nbCovoitureurs = nbCovoitureurs;
 		this.dateCovoiturage = new Date();
+		this.rayon = RAYON;
 	}
 
 	public String getName() {
@@ -73,4 +75,12 @@ public class User {
 		this.email = email;
 	}
 
+	public int getRayon() {
+		return rayon;
+	}
+
+	public void setRayon(int rayon) {
+		this.rayon = rayon;
+	}
+	
 }
