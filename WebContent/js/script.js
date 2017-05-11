@@ -15,34 +15,51 @@ function checkPwd(){
 
 
 
+//service GoogleMaps
+var map,geocoder, marker, marker2; // La carte, le service de géocodage et les marqueurs
+var ptCheck, depart, arrivee; // point de dÃ©part, arrivÃ© et de vÃ©rification
 
 /*initialise google MAP V3*/
-function init() {
-//	var directionsService = new google.maps.DirectionsService(); 
-	// service GoogleMaps
-	var map,geocoder, marker, marker2; // La carte, le service de géocodage et les marqueurs
-	var depart,arrivee,ptCheck; // point de départ, arrivé et de vérification
+function initMap() {
 	/*gestion des routes*/
-	directionsDisplay = new google.maps.DirectionsRenderer();
+	var directionsDisplay = new google.maps.DirectionsRenderer();
+	var directionsService = new google.maps.DirectionsService();
 	/*emplacement par défaut de la carte (Toulouse)*/
 	var maison = new google.maps.LatLng(43.6042600, 1.4436700);
+	depart = new google.maps.LatLng(43.51667, 1.2);
+	arrivee = new google.maps.LatLng(43.533329, 1.53333);
 	/*option par défaut de la carte*/
 	var myOptions = {
-			zoom:8,
+			zoom:10,
 			mapTypeId: google.maps.MapTypeId.ROADMAP,
 			center: maison
 	}
 	/*creation de la map*/
 	map = new google.maps.Map(document.getElementById("divMap"), myOptions);
+	/*connexion de la map + le panneau de l'itinéraire*/
+	directionsDisplay.setMap(map);
 	
-	var latLng = new google.maps.LatLng(43.6044600, 1.4439700);
-	var marker = new google.maps.Marker({
-        position: latLng,
+	/* Affichage du trajet  */
+	calcRoute(directionsService, directionsDisplay);
+	document.getElementById('mode').addEventListener('change', function() {
+		calcRoute(directionsService, directionsDisplay);
+      });
+	
+	
+	/*var markerDep = new google.maps.Marker({
+        position: depart,
         map: map
       });
 	
-	/*connexion de la map + le panneau de l'itinéraire*/
-	directionsDisplay.setMap(map);
+	var markerArr = new google.maps.Marker({
+        position: arrivee,
+        map: map
+      });*/
+	
+	
+	
+	
+	
 	directionsDisplay.setPanel(document.getElementById("divRoute"));
 	/*intialise le geocoder pour localiser les adresses */
 	geocoder = new google.maps.Geocoder();
@@ -69,6 +86,29 @@ function init() {
       handleLocationError(false, infoWindow, map.getCenter());
     }
   }
+
+function calcRoute(directionsService, directionsDisplay) {
+//	  var start = document.getElementById('start').value;
+//	  var end = document.getElementById('end').value;
+	var start = depart;
+	var end = arrivee;  
+	  
+	  var selectedMode = document.getElementById('mode').value;
+	  var request = {
+	      origin: start,
+	      destination: end,
+	      // Note that Javascript allows us to access the constant
+	      // using square brackets and a string value as its
+	      // "property."
+	      travelMode: google.maps.DirectionsTravelMode["DRIVING"]
+	  };
+	  directionsService.route(request, function(result, status) {
+	    if (status == 'OK') {
+	      directionsDisplay.setDirections(result);
+	    }
+	  });
+	}
+
 
 function handleLocationError(browserHasGeolocation, infoWindow, pos) {
     infoWindow.setPosition(pos);

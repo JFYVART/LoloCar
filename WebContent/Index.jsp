@@ -13,7 +13,7 @@
 <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
 <script src="js/script.js" type="text/javascript" language="javascript"></script>
 <!--importation de l'API google MAP Version 3-->
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA5Js00Q0b8fEtHzF_JN5NLBU2mH5p8v0s" async defer></script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA5Js00Q0b8fEtHzF_JN5NLBU2mH5p8v0s&callback=initMap" async defer></script>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 </head>
 
@@ -34,7 +34,7 @@ font-size: 8px;
 </style>
 
 
-<body onload="init();">
+<body onload="initMap();">
 	<div class="container">
 		<form name="myForm">
 			<div class="row">
@@ -47,14 +47,12 @@ font-size: 8px;
 						<tr>
 							<td><b>Départ: </b></td>
 							<td><input type="text" id="adrDep" value="" style="width:300px;"></td>
-							<!-- <b>Transport: </b>
-							<select id="mode" onchange="calcRoute();">
+							<td><b>Transport: </b>
+							<select id="mode">
 							<option value="DRIVING">voiture</option>
 							<option value="WALKING">marche</option>
 							<option value="BICYCLING">vélo</option>
-							»
-							5
-							</select></td></tr> -->
+							</select></td>
 						</tr>
 						<tr>
 							<td><b>Arrivée: </b></td>
@@ -62,9 +60,11 @@ font-size: 8px;
 							<td><input type="button" value="Recherche" onclick="rechercher('adrDep','adrArr')"></td>
 						</tr>
 						</table>
+						<div class="col-md-6" id="divMap" style="float:left;width:600px; height:350px"></div>
+							<div class="col-md-6"id="divRoute" style="float:right;width:30%;height:80%"></div>
+							
 					</div>
-					<div id="divMap" style="float:left;width:600px; height:350px"></div>
-					<div id="divRoute" style="float:right;width:30%;height:80%"></div>
+					
 					<br/>
 					<center>
 					</center>
