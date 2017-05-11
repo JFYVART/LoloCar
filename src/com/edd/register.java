@@ -27,6 +27,8 @@ public class register extends HttpServlet {
 	private String motDePasse2;
 	private String nom;
 	private String email;
+	private boolean fumeur;
+	private int nbCovoitureurs;
 
 	private Cookie[] allCookies;
 	private final String DATE_COOKIE_KEY = "DATE_COOKIE_KEY";
@@ -101,8 +103,8 @@ public class register extends HttpServlet {
 		this.motDePasse2 = request.getParameter(CHAMP_PASS2);
 		this.nom = request.getParameter(CHAMP_NOM);
 		this.email = request.getParameter(CHAMP_EMAIL);
-
-		User newUser=new User(this.nom,this.motDePasse1, this.email);
+		// TODO (inserted by : JFYVART / [11 mai 2017, 13:54:45] Modifier les params fumeurs et nb covoiturerurs !!!!
+		User newUser=new User(this.nom,this.motDePasse1, this.email, false, 1);
 		request.setAttribute("newUser", newUser);
 
 		// Remplissage du hashmap  form

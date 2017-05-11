@@ -12,7 +12,8 @@ public class UsersDAO {
 
 	static public boolean ajouteUtilisateur(String nomUtil, String pwdUtil, String email) throws Exception{
 		if ((nomUtil != null) && (pwdUtil != null)) {
-			User newUtil = new User(nomUtil, pwdUtil, email);
+			// TODO (inserted by : JFYVART / [11 mai 2017, 13:55:22] Modif new champs
+			User newUtil = new User(nomUtil, pwdUtil, email, true, 1);
 			if (ajouteUtilisateur(newUtil)) {
 				return true;
 			} else {
@@ -64,15 +65,15 @@ public class UsersDAO {
 	public static void initListeUser() {
 		if(listeUtilisateur.isEmpty()){
 			try {
-				User newUser1 =new User("toto","pwdtoto", "toto@toto.fr");
+				User newUser1 =new User("toto","pwdtoto", "toto@toto.fr", true, 1);
 				ajouteUtilisateur(newUser1);
 				System.out.println("user1 :" + newUser1);
 
-				User newUser2 =new User("titi","pwdtiti", "titi@titi.fr");
+				User newUser2 =new User("titi","pwdtiti", "titi@titi.fr", true, 1);
 				ajouteUtilisateur(newUser2);
 				System.out.println("user2 :" + newUser2);
 
-				User newUser3 =new User("tata","pwdtata", "tata@tata.fr");
+				User newUser3 =new User("tata","pwdtata", "tata@tata.fr", false, 1);
 				ajouteUtilisateur(newUser3);
 				System.out.println("user3 :" + newUser3);
 
