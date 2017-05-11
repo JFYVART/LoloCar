@@ -52,9 +52,9 @@ public class delUser extends HttpServlet {
 		request.setAttribute(CHAMP_EMAIL, this.email);
 		this.emailToDelete = request.getParameter(CHAMP_EMAILTODELETE);
 		System.out.println("Email to dleete : " + this.emailToDelete);
-		if (!"".equals(this.emailToDelete)){
-			UsersDAO.deleteUser(this.emailToDelete);
-		}
+		//		if (!"".equals(this.emailToDelete)){
+		//			UsersDAO.deleteUser(this.emailToDelete);
+		//		}
 		this.Users = UsersDAO.fillHashMapWithListUsers(this.email);
 
 		request.setAttribute("users", this.Users);

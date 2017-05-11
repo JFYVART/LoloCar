@@ -78,8 +78,8 @@ margin-left: -15px;
 							<div class="col-sm-6 input-group">
 								<span class="input-group-addon"><i
 									class="glyphicon glyphicon-screenshot"></i></span><input 
-									class="form-control" id=emailUtilisateur type="email"
-									name="emailUtilisateur" value="${emailUtilisateur}" placeholder="Email recherché">
+									class="form-control" id=emailUtilisateur type="text"
+									name="emailUtilisateur" value="${emailUtilisateur}" placeholder="Utilisateur recherché">
 							</div>
 						<br>			
 						<div class="col-sm-6">
@@ -95,7 +95,7 @@ margin-left: -15px;
 						      <tr>
 						      <th>Nom</th>
 						      <th>Email</th>
-						      <th>(Suppr)</th>
+						      <th>Contacter l'utilisateur)</th>
 						      </tr>
 						    </thead>
 						    <tbody>
@@ -103,7 +103,7 @@ margin-left: -15px;
      								<tr>
           								<td><c:out value="${userItem.value.name}"/></td>
           								<td><c:out value="${userItem.value.email}" /></td>
-          								<td onclick="location.href='delUser?emailUserToDel='"><c:out value='${user.email}'/><span class="glyphicon glyphicon-remove-sign"></span></td>
+          								<td onclick="location.href='delUser?emailUserToDel='"><c:out value='${user.email}'/><span class="glyphicon glyphicon-envelope"></span></td>
           							</tr>	
      							</c:forEach>
 						    </tbody>
