@@ -38,7 +38,7 @@ font-size:12px;
 color: #a5abaf;
 }
 
-.glyphicon-education {
+.glyphicon-globe {
 color:#5e91b2;
 }
 
@@ -66,16 +66,16 @@ color:#5e91b2;
 				<div class="container-fluid bg-grey">
 				<h2 class="text-center col-sm-12">
 					<div class="well">
-					<i class="glyphicon glyphicon-education"></i>
-					User Manager
+					<i class="glyphicon glyphicon-globe"></i>
+					Covoiturage with LoloCar !!!
 					</div>
 				</h2>
 				
 				<ul class="nav nav-pills nav-stacked">
   					<li><a href="Index.jsp">Accueil</a></li>
-  					<li><a href=<c:url value="/register"/>>Créer un nouvel utilisateur</a></li>
-  					<li><a href="#">Connexion à mon espace</a></li>
-  					<li><a href="ListUser.jsp">Liste des utilisateurs</a></li>
+  					<li><a href=<c:url value="/register"/>>Créer un compte</a></li>
+  					<li><a href="#">Se connecter</a></li>
+  					<li><a href="ListUser.jsp">Recherche d'un covoiturage</a></li>
 				</ul>
 			</div>	
 </body>
