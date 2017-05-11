@@ -115,7 +115,7 @@ function calcRoute(directionsService, directionsDisplay) {
 //Data for the markers consisting of a name, a LatLng and a zIndex for the
 //order in which these markers should display on top of each other.
 var Users = [
-['Lolo', 43.533329, 1.23333, 1]
+["Laurent Palmier", 43.533329, 1.23333, 1]
 ];
 
 
@@ -151,7 +151,7 @@ function setMarkers(map) {
         map: map,
         icon: image,
         shape: shape,
-        title: user[0],
+        label: user[0],
         zIndex: user[3]
       });
     }
