@@ -12,6 +12,7 @@
 <link href="https://fonts.googleapis.com/css?family=Playball" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
 <script src="js/script.js" type="text/javascript" language="javascript"></script>
+<script src="js/google.js" type="text/javascript" language="javascript"></script>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 </head>
 
@@ -72,12 +73,16 @@ color:#5e91b2;
 				</h2>
 				
 				<ul class="nav nav-pills nav-stacked">
-  					<li><a href="Index.jsp">Accueil</a></li>
-  					<li><a href=<c:url value="/register"/>>Créer un compte</a></li>
-  					<li><a href="#">Se connecter</a></li>
-  					<li><a href="ListUser.jsp">Contacter un utilisateur</a></li>
-  					<li><a href="ListCovoiturage.jsp">Rechercher / proposer un covoiturage</a></li>
-				</ul>
-			</div>	
+  					<li><a href="Index.jsp"><span class="glyphicon glyphicon-home"></span> Accueil </a></li>
+  						<a><span class="glyphicon glyphicon-user"></span> Compte utilisateur </a>
+      						<li><a href="#"><span class="glyphicon glyphicon-share"></span> Se connecter </a></li>
+        					<li><a href=<c:url value="/register"/>><span class="glyphicon glyphicon-check"></span> Créer un compte </a></li>
+        					<li><a href="#"><span class="glyphicon glyphicon-edit"></span> Modifier / supprimer son compte </a></li>                        
+      					<a><span class="glyphicon glyphicon-road"></span> Covoiturage </a>
+      						<li><a href="ListCovoiturage.jsp"><span class="glyphicon glyphicon-plane"></span> Rechercher / proposer un covoiturage </a></li>
+        					<li><a href="ListUser.jsp"><span class="glyphicon glyphicon-envelope"></span> Contacter un utilisateur </a></li>
+        					<li><a href="Trajet.jsp"><span class="glyphicon glyphicon-random"></span> Gérer son trajet </a></li>                       
+      					
+    		</div>	
 </body>
 </html>

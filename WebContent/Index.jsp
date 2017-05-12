@@ -12,6 +12,7 @@
 <link href="https://fonts.googleapis.com/css?family=Playball" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
 <script src="js/script.js" type="text/javascript" language="javascript"></script>
+<script src="js/google.js" type="text/javascript" language="javascript"></script>
 <!--importation de l'API google MAP Version 3-->
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA5Js00Q0b8fEtHzF_JN5NLBU2mH5p8v0s&callback=initMap" async defer></script>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>

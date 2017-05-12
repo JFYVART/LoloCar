@@ -12,6 +12,7 @@
 <link href="https://fonts.googleapis.com/css?family=Playball" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
 <script src="js/script.js" type="text/javascript" language="javascript"></script>
+<script src="js/google.js" type="text/javascript" language="javascript"></script>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 </head>
 
