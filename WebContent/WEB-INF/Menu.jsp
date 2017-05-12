@@ -21,7 +21,7 @@ body {
 	background-color:#b3cadb;
     font: 16px 'Ubuntu', sans-serif;
 	line-height:1.4;
-	padding: 10px;
+
 }
 
 .text-center {
@@ -32,17 +32,46 @@ margin-bottom: 0px;
 }
 
 .nav-pills{
-margin-bottom: 15px;
-margin-left: 15px;
+
+margin-left: 20px;
 padding-right: 30px;
-font-size:12px;
+font-size:14px;
 color: #a5abaf;
 }
 
-.glyphicon-globe {
+.glyphicon-home {
+margin-right: 10px;
+margin-left: -10px;
 color:#5e91b2;
 }
 
+.glyphicon-share, .glyphicon-check, 
+.glyphicon-edit, .glyphicon-plane, .glyphicon-envelope,
+.glyphicon-random {
+margin-left : 20px;
+margin-right: 10px;
+color:#5e91b2;
+}
+
+p{
+margin-right: 4px;
+margin-left : 15px;
+margin-top : 0px;
+margin-bottom : 0px;
+color:#5e91b2;
+font-size:14px;
+}
+
+.glyphicon-user, .glyphicon-road{
+margin-right: 10px;
+margin-left: -10px;
+color:#5e91b2;
+font-size:14px;
+}
+a{
+margin-top : -5px;
+margin-bottom : -5px;
+}
 
 .nav-pills a:hover {
     color: #a5abaf;
@@ -73,15 +102,15 @@ color:#5e91b2;
 				</h2>
 				
 				<ul class="nav nav-pills nav-stacked">
-  					<li><a href="Index.jsp"><span class="glyphicon glyphicon-home"></span> Accueil </a></li>
-  						<a><span class="glyphicon glyphicon-user"></span> Compte utilisateur </a>
-      						<li><a href="#"><span class="glyphicon glyphicon-share"></span> Se connecter </a></li>
-        					<li><a href=<c:url value="/register"/>><span class="glyphicon glyphicon-check"></span> Créer un compte </a></li>
-        					<li><a href="#"><span class="glyphicon glyphicon-edit"></span> Modifier / supprimer son compte </a></li>                        
-      					<a><span class="glyphicon glyphicon-road"></span> Covoiturage </a>
-      						<li><a href="ListCovoiturage.jsp"><span class="glyphicon glyphicon-plane"></span> Rechercher / proposer un covoiturage </a></li>
-        					<li><a href="ListUser.jsp"><span class="glyphicon glyphicon-envelope"></span> Contacter un utilisateur </a></li>
-        					<li><a href="Trajet.jsp"><span class="glyphicon glyphicon-random"></span> Gérer son trajet </a></li>                       
+  							<li id = "accueil"><a href="Index.jsp"><span class="glyphicon glyphicon-home"></span>Accueil</a></li>
+  						<p><span class="glyphicon glyphicon-user"></span>Compte utilisateur</p>
+      						<li><a href="#"><span class="glyphicon glyphicon-share"></span>Se connecter</a></li>
+        					<li><a href=<c:url value="/register"/>><span class="glyphicon glyphicon-check"></span>Créer un compte</a></li>
+        					<li><a href="#"><span class="glyphicon glyphicon-edit"></span>Modifier / supprimer son compte</a></li>                        
+      					<p><span class="glyphicon glyphicon-road"></span>Covoiturage</p>
+      						<li><a href="ListCovoiturage.jsp"><span class="glyphicon glyphicon-plane"></span>Rechercher / proposer un covoiturage</a></li>
+        					<li><a href="ListUser.jsp"><span class="glyphicon glyphicon-envelope"></span>Contacter un utilisateur</a></li>
+        					<li><a href="Trajet.jsp"><span class="glyphicon glyphicon-random"></span>Gérer son trajet</a></li>                       
       					
     		</div>	
 </body>
