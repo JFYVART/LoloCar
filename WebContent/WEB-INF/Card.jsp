@@ -25,12 +25,30 @@ dl{
 <body>
 	<div class="container bg-grey">
 				<div class="well col-sm-6">
-  					<h2>Informations de l'utilisateur :</h2>    
+  					<h2>Informations du compte :</h2>    
   					<dl>
+  					<h4> * Utilisateur :</h4>
     				<dt>Email</dt>
     				<dd>- ${newUser.email}</dd>
-    				<dt>nom</dt>
+    				<dt>Nom</dt>
     				<dd>- ${newUser.name}</dd>
+    				
+    				<h4> * Conditions de covoiturage :</h4>
+    				<dt>Voiture Fumeur (oui / non)</dt>
+    				<dd>- ${newUser.conditionsTrajet.fumeur}</dd>
+    				<dt>Nombre passagers</dt>
+    				<dd>- ${newUser.conditionsTrajet.nbCovoitureurs}</dd>
+    				<dt>Qualité ('Conducteur / Passager)</dt>
+    				<dd>- ${newUser.isConducteur}</dd>
+    				
+    				
+    				<h4> * Adresse :</h4>
+    				<dt>Rue</dt>
+    				<dd>- ${newUser.adresseUser.voie}</dd>
+    				<dt>Code postal</dt>
+    				<dd>- ${newUser.adresseUser.cp}</dd>
+    				<dt>Ville</dt>
+    				<dd>- ${newUser.adresseUser.ville}</dd>
   					</dl>
   				</div>	    
 			</div>

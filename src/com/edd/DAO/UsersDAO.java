@@ -1,7 +1,9 @@
-package com.edd;
+package com.edd.DAO;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+
+import com.edd.Entity.User;
 
 public class UsersDAO {
 	static private ArrayList<User> listeUtilisateur = new ArrayList<User>();
@@ -78,6 +80,10 @@ public class UsersDAO {
 				ajouteUtilisateur(newUser3);
 				System.out.println("user3 :" + newUser3);
 
+				User newUser4 =new User("Berger - Levrault","", "help.Covoiturage@Magnus.fr", false, 1, "64 av Edmond Rostand", "31000", "Toulouse", 43.533329, 1.53333,"",3,true, false );
+				ajouteUtilisateur(newUser4);
+				System.out.println("user4 :" + newUser4);
+
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -103,6 +109,26 @@ public class UsersDAO {
 
 		}
 		return Users;
+	}
+
+
+	public static Boolean isUserConnected(String email, String pwd){
+		boolean response = false;
+		if(listeUtilisateur.isEmpty()){
+			initListeUser();
+		}
+		for (User utilisateur : listeUtilisateur) {
+			System.out.println("parcours liste des utilisateurs pour recherche utilisateur");
+			if ((!"".equals(email))&&(!"".equals(pwd))){
+				if (utilisateur.getEmail().equalsIgnoreCase(email)) {
+					if (utilisateur.getPassword().equalsIgnoreCase(pwd)) {
+						response = true;
+					}
+				}
+			}
+
+		}
+		return response;
 	}
 
 	public static void deleteUser(String nameSearched) {

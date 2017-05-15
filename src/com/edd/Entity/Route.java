@@ -1,4 +1,4 @@
-package com.edd;
+package com.edd.Entity;
 
 import java.util.HashMap;
 

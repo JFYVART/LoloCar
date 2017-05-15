@@ -1,4 +1,4 @@
-package com.edd;
+package com.edd.Entity;
 
 public class User {
 
@@ -60,7 +60,7 @@ public class User {
 		this.name = name;
 	}
 
-	protected void setPassword(String password) {
+	public void setPassword(String password) {
 		this.password = password;
 	}
 	protected void setEmail(String email) {
@@ -99,6 +99,10 @@ public class User {
 		this.isConducteur = isConducteur;
 	}
 
-
+	@Override
+	public String toString(){
+		String response = "Nom :" + this.name + ", eMail :" + this.email + ", fumeur :" + this.conditionsTrajet.isFumeur() + ", nb passagers : " + this.conditionsTrajet.getNbCovoitureurs() + ", conducteur :" + this.isConducteur;
+		return response;
+	}
 
 }

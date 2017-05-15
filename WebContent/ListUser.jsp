@@ -104,7 +104,7 @@ margin-left: -15px;
      								<tr>
           								<td><c:out value="${userItem.value.name}"/></td>
           								<td><c:out value="${userItem.value.email}" /></td>
-          								<td onclick="location.href='delUser?emailUserToDel='"><c:out value='${user.email}'/><span class="glyphicon glyphicon-envelope"></span></td>
+          								<td onclick="location.href='mailUser?emailUserToDel='"><c:out value='${user.email}'/><span class="glyphicon glyphicon-envelope"></span></td>
           							</tr>	
      							</c:forEach>
 						    </tbody>

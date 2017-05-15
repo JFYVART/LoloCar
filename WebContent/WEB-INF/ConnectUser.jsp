@@ -49,10 +49,7 @@ color:#5e91b2;
 				</div>
 				<div class="col-md-9">
 					<br>	
-					<c:import url="/WEB-INF/Form.jsp" />
-					<c:if test="${!errorStatus}">
-						<c:import url="/WEB-INF/Card.jsp" />
-					</c:if>
+					<c:import url="/WEB-INF/Connect.jsp" />
 				</div>
 			</div>	
 		</form>

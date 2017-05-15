@@ -1,4 +1,4 @@
-package com.edd;
+package com.edd.Servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -15,13 +15,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.edd.DAO.UsersDAO;
+import com.edd.Entity.User;
 
-@WebServlet("/connect")
+
+@WebServlet("/modify")
 
 /**
  * Servlet implementation class ConnectUserServlet
  */
-public class connect extends HttpServlet {
+public class modify extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	// Champs USER
@@ -66,7 +69,7 @@ public class connect extends HttpServlet {
 	private final String DATE_COOKIE_KEY = "DATE_COOKIE_KEY";
 	private final String COUNT_COOKIE_KEY = "COUNT_COOKIE_KEY";
 
-	private final String URL_NAME = "WEB-INF/ConnectUser.jsp";
+	private final String URL_NAME = "WEB-INF/ModifyUser.jsp";
 
 
 	public static final String CHAMP_FORM = "form";
@@ -95,7 +98,7 @@ public class connect extends HttpServlet {
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public connect() {
+	public modify() {
 		super();
 		// TODO Auto-generated constructor stub
 	}

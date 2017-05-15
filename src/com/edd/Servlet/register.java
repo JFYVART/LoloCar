@@ -1,4 +1,4 @@
-package com.edd;
+package com.edd.Servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -14,6 +14,9 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.edd.DAO.UsersDAO;
+import com.edd.Entity.User;
 
 
 @WebServlet("/register")
@@ -142,21 +145,38 @@ public class register extends HttpServlet {
 		this.ville = request.getParameter(CHAMP_VILLE);
 
 		//Champs Marker associé à l'adresse
-		this.longitude = new Double(request.getParameter(CHAMP_LONGITUDE)).doubleValue();
-		this.lattitude =  new Double(request.getParameter(CHAMP_LATTITUDE)).doubleValue();
+		//this.longitude = new Double(request.getParameter(CHAMP_LONGITUDE)).doubleValue();
+		//this.lattitude =  new Double(request.getParameter(CHAMP_LATTITUDE)).doubleValue();
 		this.nomMarker = request.getParameter(CHAMP_NOMMARKER);
-		this.index = new Integer(request.getParameter(CHAMP_INDEX)).intValue();
+		//this.index = new Integer(request.getParameter(CHAMP_INDEX)).intValue();
 		this.isConducteur = new Boolean(request.getParameter(CHAMP_ISCONDUCTEUR)).booleanValue();
-		this.estSelectionne = new Boolean(request.getParameter(CHAMP_ISSELECTIONNE)).booleanValue();
+		//this.estSelectionne = new Boolean(request.getParameter(CHAMP_ISSELECTIONNE)).booleanValue();
 
 
 		// TODO (inserted by : JFYVART / [11 mai 2017, 13:54:45] Modifier les params fumeurs et nb covoiturerurs !!!!
 		User newUser=new User(this.nom,this.motDePasse1, this.email, false, 1, this.nomMarker, this.nomMarker, this.nomMarker, this.lattitude, this.lattitude, this.nomMarker, this.index, this.estSelectionne, this.estSelectionne);
 		request.setAttribute("newUser", newUser);
+		System.out.println(newUser.toString());
 
 		// Remplissage du hashmap  form
 		this.form.put(CHAMP_EMAIL, this.email);
 		this.form.put(CHAMP_NOM, this.nom);
+
+		//		if (this.fumeur){
+		//			this.form.put(CHAMP_FUMEUR, "Véhicule Fumeurs");
+		//		}
+		//
+		//		if (this.isConducteur){
+		//			this.form.put(CHAMP_ISCONDUCTEUR, "Vous proposez un covoiturage");
+		//		} else {
+		//			this.form.put(CHAMP_ISCONDUCTEUR, "Vous recherchez un covoiturage");
+		//		}
+		//
+		//		this.form.put(CHAMP_VOIE,  this.voie);
+		//		this.form.put(CHAMP_CP,  this.cp);
+		//		this.form.put(CHAMP_VILLE, this.ville);
+
+
 		// Réinit des erreurs.
 		this.errors = new HashMap<String, String>();
 

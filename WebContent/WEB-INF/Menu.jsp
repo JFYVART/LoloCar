@@ -39,15 +39,15 @@ font-size:14px;
 color: #a5abaf;
 }
 
-.glyphicon-home {
+.nav .glyphicon-home, .nav glyphicon-globe {
 margin-right: 10px;
 margin-left: -10px;
 color:#5e91b2;
 }
 
-.glyphicon-share, .glyphicon-check, 
-.glyphicon-edit, .glyphicon-plane, .glyphicon-envelope,
-.glyphicon-random {
+.nav .glyphicon-share, .nav .glyphicon-check, 
+.nav .glyphicon-edit,.nav .glyphicon-plane, .nav .glyphicon-envelope,
+.nav .glyphicon-random {
 margin-left : 20px;
 margin-right: 10px;
 color:#5e91b2;
@@ -62,7 +62,7 @@ color:#5e91b2;
 font-size:14px;
 }
 
-.glyphicon-user, .glyphicon-road{
+.nav .glyphicon-user,.nav  .glyphicon-road{
 margin-right: 10px;
 margin-left: -10px;
 color:#5e91b2;

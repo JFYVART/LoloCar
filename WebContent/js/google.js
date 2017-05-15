@@ -3,7 +3,7 @@
  */// service GoogleMaps
 var map, geocoder, marker, marker2; // La carte, le service de géocodage et les
 									// marqueurs
-var ptCheck, depart, arrivee; // point de dÃ©part, arrivÃ© et de vÃ©rification
+var ptCheck, depart, arrivee, pos; // point de dÃ©part, arrivÃ© et de vÃ©rification
 var monTrajet = new Array(); // Tableau du trajet
 
 /* initialise google MAP V3 */
@@ -41,20 +41,20 @@ function initMap() {
 	// Try HTML5 geolocation.
 	if (navigator.geolocation) {
 		navigator.geolocation.getCurrentPosition(function(position) {
-			var pos = {
+			pos = {
 				lat : position.coords.latitude,
 				lng : position.coords.longitude
 			};
 
 			infoWindow.setPosition(pos);
-			infoWindow.setContent('Location found.');
+			infoWindow.setContent('Votre position');
 			map.setCenter(pos);
 		}, function() {
-			handleLocationError(true, infoWindow, map.getCenter());
+			handleLocationError(true, infoWindow, pos);
 		});
 	} else {
 		// Browser doesn't support Geolocation
-		handleLocationError(false, infoWindow, map.getCenter());
+		handleLocationError(false, infoWindow, pos);
 	}
 }
 
@@ -112,20 +112,20 @@ function initVisuMap() {
 	// Try HTML5 geolocation.
 	if (navigator.geolocation) {
 		navigator.geolocation.getCurrentPosition(function(position) {
-			var pos = {
+			pos = {
 				lat : position.coords.latitude,
 				lng : position.coords.longitude
 			};
 
 			infoWindow.setPosition(pos);
-			infoWindow.setContent('Location found.');
+			infoWindow.setContent('Votre position');
 			map.setCenter(pos);
 		}, function() {
-			handleLocationError(true, infoWindow, map.getCenter());
+			handleLocationError(true, infoWindow, pos);
 		});
 	} else {
 		// Browser doesn't support Geolocation
-		handleLocationError(false, infoWindow, map.getCenter());
+		handleLocationError(false, infoWindow, pos);
 	}
 }
 
@@ -247,8 +247,19 @@ function setMarkers(map) {
 				label : user[0],
 				zIndex : user[3]
 			});
-			}
+		}
 	}
+	
+	var BL = new google.maps.Marker({
+		position : {
+			lat : 43.533329, 
+			lng : 1.53333
+		},
+		map : map,
+		shape : shape,
+		label : "Berger-Levrault",
+		zIndex : 99
+	});
 }
 
 function handleLocationError(browserHasGeolocation, infoWindow, pos) {
