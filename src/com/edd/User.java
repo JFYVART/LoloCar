@@ -9,6 +9,7 @@ public class User {
 	private ConditionsTrajet conditionsTrajet;
 	private Adresse adresseUser;
 	private Route covoituragePropose;
+	private boolean isConducteur;
 
 
 	public User() {
@@ -20,6 +21,8 @@ public class User {
 		this.password = pwd;
 		this.email = email;
 		this.conditionsTrajet = new ConditionsTrajet(nbCovoitureurs, fumeur);
+		this.isConducteur = isConducteur;
+		//  Création de l'adresse et du marker associé
 		if ("".equalsIgnoreCase(nomMarker)){
 			this.adresseUser = new Adresse(voie, cp, ville,longitude, lattitude, nom,index, isConducteur, estSelectionne) {
 			};
@@ -27,6 +30,7 @@ public class User {
 			this.adresseUser = new Adresse(voie, cp, ville,longitude, lattitude, nomMarker,index, isConducteur, estSelectionne);
 		}
 
+		// création si besoin de la route (covoiturage)
 		if (isConducteur) {
 			this.covoituragePropose = new Route(nbCovoitureurs, this.conditionsTrajet, this, this.adresseUser.getMarkerAdresse());
 		}
@@ -77,6 +81,22 @@ public class User {
 
 	protected void setAdresseUser(Adresse adresseUser) {
 		this.adresseUser = adresseUser;
+	}
+
+	public Route getCovoituragePropose() {
+		return this.covoituragePropose;
+	}
+
+	public void setCovoituragePropose(Route covoituragePropose) {
+		this.covoituragePropose = covoituragePropose;
+	}
+
+	public boolean isConducteur() {
+		return this.isConducteur;
+	}
+
+	public void setConducteur(boolean isConducteur) {
+		this.isConducteur = isConducteur;
 	}
 
 

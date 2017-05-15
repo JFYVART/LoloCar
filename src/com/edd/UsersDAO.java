@@ -105,12 +105,12 @@ public class UsersDAO {
 		return Users;
 	}
 
-	public static void deleteUser(String loginSearched) {
+	public static void deleteUser(String nameSearched) {
 		if(!listeUtilisateur.isEmpty()){
 			for (User utilisateur : listeUtilisateur) {
-				System.out.println("parcours liste des utilisateurs pour suppression de :" + loginSearched);
-				if (!"".equals(loginSearched)){
-					if (utilisateur.getEmail().equalsIgnoreCase(loginSearched)) {
+				System.out.println("parcours liste des utilisateurs pour suppression de :" + nameSearched);
+				if (!"".equals(nameSearched)){
+					if (utilisateur.getName().equalsIgnoreCase(nameSearched)) {
 						listeUtilisateur.remove(utilisateur);
 						System.out.println("suppression de :" + utilisateur);
 						break;
@@ -120,4 +120,18 @@ public class UsersDAO {
 		}
 
 	}
+
+	public static void modifyUser(User userModifie){
+		for (User utilisateur : listeUtilisateur) {
+			System.out.println("parcours liste des utilisateurs pour suppression de :" + userModifie.getName());
+			if (!"".equals(userModifie.getName())){
+				if (utilisateur.getName().equalsIgnoreCase(userModifie.getName())) {
+					utilisateur = userModifie;
+					System.out.println("suppression de :" + userModifie.getName());
+					break;
+				}
+			}
+		}
+	}
+
 }
