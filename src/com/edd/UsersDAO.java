@@ -10,10 +10,10 @@ public class UsersDAO {
 
 	}
 
-	static public boolean ajouteUtilisateur(String nomUtil, String pwdUtil, String email) throws Exception{
+	static public boolean ajouteUtilisateur(String nomUtil, String pwdUtil, String email, boolean fumeur, int nbCovoitureurs, String voie, String cp, String ville, double longitude, double lattitude, String nomMarker, int index, boolean isConducteur, boolean estSelectionne)  throws Exception{
 		if ((nomUtil != null) && (pwdUtil != null)) {
 			// TODO (inserted by : JFYVART / [11 mai 2017, 13:55:22] Modif new champs
-			User newUtil = new User(nomUtil, pwdUtil, email, true, 1);
+			User newUtil = new User(nomUtil, pwdUtil, email, true, 1, nomMarker, nomMarker, nomMarker, lattitude, lattitude, nomMarker, index, estSelectionne, estSelectionne);
 			if (ajouteUtilisateur(newUtil)) {
 				return true;
 			} else {
@@ -65,15 +65,16 @@ public class UsersDAO {
 	public static void initListeUser() {
 		if(listeUtilisateur.isEmpty()){
 			try {
-				User newUser1 =new User("toto","pwdtoto", "toto@toto.fr", true, 1);
+				User newUser1 =new User("Laurent Palmier","", "Laurent.Palmier@Magnus.fr", true, 1,"Place de la mairie", "31470", "Fonsorbes", 43.533329, 1.23333,"Laurent Palmier", 0, false, false);
+
 				ajouteUtilisateur(newUser1);
 				System.out.println("user1 :" + newUser1);
 
-				User newUser2 =new User("titi","pwdtiti", "titi@titi.fr", true, 1);
+				User newUser2 =new User("JF Yvart","", "JF.Yvart@Magnus.fr", true, 1,"8 impasse du Cinsault", "31470", "Saint Lys", 43.51667, 1.2,"",1,true,false );
 				ajouteUtilisateur(newUser2);
 				System.out.println("user2 :" + newUser2);
 
-				User newUser3 =new User("tata","pwdtata", "tata@tata.fr", false, 1);
+				User newUser3 =new User("Sybille Cazaux","", "Sybille.Cazaux@Magnus.fr", false, 1, "Place de la mairie", "31000", "Toulouse", 43.6042600, 1.4436700,"",2,false, false );
 				ajouteUtilisateur(newUser3);
 				System.out.println("user3 :" + newUser3);
 

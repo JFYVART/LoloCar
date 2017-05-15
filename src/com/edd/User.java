@@ -1,31 +1,44 @@
 package com.edd;
 
-import java.util.Date;
-
 public class User {
 
-	private static final int RAYON = 10;
+
 	private String name;
 	private String password;
 	private String email;
-	private boolean fumeur;
-	private int nbCovoitureurs;
-	private Date dateCovoiturage;
-	private int rayon;
+	private ConditionsTrajet conditionsTrajet;
+	private Adresse adresseUser;
+	private Route covoituragePropose;
+
 
 	public User() {
 
 	}
 
-	public User(String nom, String pwd, String email, boolean fumeur, int nbCovoitureurs) {
+	public User(String nom, String pwd, String email, boolean fumeur, int nbCovoitureurs, String voie, String cp, String ville, double longitude, double lattitude, String nomMarker, int index, boolean isConducteur, boolean estSelectionne) {
 		this.name = nom;
 		this.password = pwd;
 		this.email = email;
-		this.fumeur = fumeur;
-		this.nbCovoitureurs = nbCovoitureurs;
-		this.dateCovoiturage = new Date();
-		this.rayon = RAYON;
+		this.conditionsTrajet = new ConditionsTrajet(nbCovoitureurs, fumeur);
+		if ("".equalsIgnoreCase(nomMarker)){
+			this.adresseUser = new Adresse(voie, cp, ville,longitude, lattitude, nom,index, isConducteur, estSelectionne) {
+			};
+		} else {
+			this.adresseUser = new Adresse(voie, cp, ville,longitude, lattitude, nomMarker,index, isConducteur, estSelectionne);
+		}
+
+		if (isConducteur) {
+			this.covoituragePropose = new Route(nbCovoitureurs, this.conditionsTrajet, this, this.adresseUser.getMarkerAdresse());
+		}
+
 	}
+
+	public User(String nom, String pwd, String email) {
+		this.name = nom;
+		this.password = pwd;
+		this.email = email;
+	}
+
 
 	public String getName() {
 		return this.name;
@@ -39,31 +52,6 @@ public class User {
 		return this.email;
 	}
 
-
-	protected void setFumeur(boolean fumeur) {
-		this.fumeur = fumeur;
-	}
-
-	protected void setNbCovoitureurs(int nbCovoitureurs) {
-		this.nbCovoitureurs = nbCovoitureurs;
-	}
-
-	protected void setDateCovoiturage(Date dateCovoiturage) {
-		this.dateCovoiturage = dateCovoiturage;
-	}
-
-	public boolean isFumeur() {
-		return this.fumeur;
-	}
-
-	public int getNbCovoitureurs() {
-		return this.nbCovoitureurs;
-	}
-
-	public Date getDateCovoiturage() {
-		return this.dateCovoiturage;
-	}
-
 	protected void setName(String name) {
 		this.name = name;
 	}
@@ -75,12 +63,22 @@ public class User {
 		this.email = email;
 	}
 
-	public int getRayon() {
-		return rayon;
+	public ConditionsTrajet getConditionsTrajet() {
+		return this.conditionsTrajet;
 	}
 
-	public void setRayon(int rayon) {
-		this.rayon = rayon;
+	protected void setConditionsTrajet(ConditionsTrajet conditionsTrajet) {
+		this.conditionsTrajet = conditionsTrajet;
 	}
-	
+
+	public Adresse getAdresseUser() {
+		return this.adresseUser;
+	}
+
+	protected void setAdresseUser(Adresse adresseUser) {
+		this.adresseUser = adresseUser;
+	}
+
+
+
 }

@@ -23,12 +23,44 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class register extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+
+	// Champs USER
 	private String motDePasse1;
 	private String motDePasse2;
 	private String nom;
 	private String email;
+	public static final String CHAMP_PASS1 = "pwd1Utilisateur";
+	public static final String CHAMP_PASS2 = "pwd2Utilisateur";
+	public static final String CHAMP_NOM = "nameUtilisateur";
+	public static final String CHAMP_EMAIL = "emailUtilisateur";
+
+	// Champs Conditions trajet
 	private boolean fumeur;
 	private int nbCovoitureurs;
+	public static final String CHAMP_FUMEUR = "fumeurUtilisateur";
+	public static final String CHAMP_NBCOVOITURES = "nbCovoituresUtilisateur";
+
+	// Champs Adresse
+	private String voie;
+	private String cp;
+	private String ville;
+	public static final String CHAMP_VOIE = "voieUtilisateur";
+	public static final String CHAMP_CP = "cpUtilisateur";
+	public static final String CHAMP_VILLE = "villeUtilisateur";
+	//Champs Marker associé à l'adresse
+	private double longitude;
+	private double lattitude;
+	private String nomMarker;
+	private int index;
+	private boolean isConducteur;
+	private boolean estSelectionne;
+	public static final String CHAMP_LONGITUDE = "longitudeUtilisateur";
+	public static final String CHAMP_LATTITUDE = "lattitudeUtilisateur";
+	public static final String CHAMP_NOMMARKER = "nomMarkerUtilisateur";
+	public static final String CHAMP_INDEX = "indexUtilisateur";
+	public static final String CHAMP_ISCONDUCTEUR = "isConducteurUtilisateur";
+	public static final String CHAMP_ISSELECTIONNE = "isSelectionneUtilisateur";
+
 
 	private Cookie[] allCookies;
 	private final String DATE_COOKIE_KEY = "DATE_COOKIE_KEY";
@@ -36,10 +68,7 @@ public class register extends HttpServlet {
 
 	private final String URL_NAME = "WEB-INF/RegisterUser.jsp";
 
-	public static final String CHAMP_PASS1 = "pwd1Utilisateur";
-	public static final String CHAMP_PASS2 = "pwd2Utilisateur";
-	public static final String CHAMP_NOM = "nameUtilisateur";
-	public static final String CHAMP_EMAIL = "emailUtilisateur";
+
 	public static final String CHAMP_FORM = "form";
 	public static final String CHAMP_ERRORS = "errors";
 	public static final String CHAMP_ERROR_STATUS = "errorStatus";
@@ -103,8 +132,26 @@ public class register extends HttpServlet {
 		this.motDePasse2 = request.getParameter(CHAMP_PASS2);
 		this.nom = request.getParameter(CHAMP_NOM);
 		this.email = request.getParameter(CHAMP_EMAIL);
+
+		this.fumeur = new Boolean(request.getParameter(CHAMP_FUMEUR)).booleanValue();
+		this.nbCovoitureurs = new Integer(request.getParameter(CHAMP_NBCOVOITURES)).intValue();
+
+		// Champs Adresse
+		this.voie = request.getParameter(CHAMP_VOIE);
+		this.cp = request.getParameter(CHAMP_CP);
+		this.ville = request.getParameter(CHAMP_VILLE);
+
+		//Champs Marker associé à l'adresse
+		this.longitude = new Double(request.getParameter(CHAMP_LONGITUDE)).doubleValue();
+		this.lattitude =  new Double(request.getParameter(CHAMP_LATTITUDE)).doubleValue();
+		this.nomMarker = request.getParameter(CHAMP_NOMMARKER);
+		this.index = new Integer(request.getParameter(CHAMP_INDEX)).intValue();
+		this.isConducteur = new Boolean(request.getParameter(CHAMP_ISCONDUCTEUR)).booleanValue();
+		this.estSelectionne = new Boolean(request.getParameter(CHAMP_ISSELECTIONNE)).booleanValue();
+
+
 		// TODO (inserted by : JFYVART / [11 mai 2017, 13:54:45] Modifier les params fumeurs et nb covoiturerurs !!!!
-		User newUser=new User(this.nom,this.motDePasse1, this.email, false, 1);
+		User newUser=new User(this.nom,this.motDePasse1, this.email, false, 1, this.nomMarker, this.nomMarker, this.nomMarker, this.lattitude, this.lattitude, this.nomMarker, this.index, this.estSelectionne, this.estSelectionne);
 		request.setAttribute("newUser", newUser);
 
 		// Remplissage du hashmap  form
@@ -158,7 +205,7 @@ public class register extends HttpServlet {
 		boolean userValidated = true;
 		try {
 			if (pwdValidated) {
-				userValidated = UsersDAO.ajouteUtilisateur(this.nom, this.motDePasse1, this.email);
+				userValidated = UsersDAO.ajouteUtilisateur(this.nom, this.motDePasse1, this.email, true, 1, this.nomMarker, this.nomMarker, this.nomMarker, this.lattitude, this.lattitude, this.nomMarker, this.index, this.estSelectionne, this.estSelectionne);
 			}
 		} catch (Exception e) {
 			this.errors.put(CHAMP_PASS1, e.getMessage());
