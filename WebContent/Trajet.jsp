@@ -50,7 +50,7 @@ font-size: 10px;
 background-color:#f4f5f7;
 }
 
-glyphicon-remove-sign{
+glyphicon glyphicon-plus{
 cursor:pointer;
 }
 
@@ -69,7 +69,8 @@ margin-left: -15px;
 
 <body>
 	<div class="container">
-		<form name="myListUser" method="post" action="listeUsers">	
+		<form id="form" name="myListUser" method="post" action="addUsersTrajet">
+		<input id="emailUserToAdd" name="emailUserToAdd" type="hidden"></input>	
 				<div class="row">
 					<div class="col-md-3">
 							<c:import url="/WEB-INF/Menu.jsp" />
@@ -96,7 +97,7 @@ margin-left: -15px;
 						      <tr>
 						      <th>Nom</th>
 						      <th>Email</th>
-						      <th>Contacter l'utilisateur)</th>
+						      <th>Ajouter un utilisateur</th>
 						      </tr>
 						    </thead>
 						    <tbody>
@@ -104,15 +105,43 @@ margin-left: -15px;
      								<tr>
           								<td><c:out value="${userItem.value.name}"/></td>
           								<td><c:out value="${userItem.value.email}" /></td>
-          								<td onclick="location.href='delUser?emailUserToDel='"><c:out value='${user.email}'/><span class="glyphicon glyphicon-envelope"></span></td>
+          								<td onclick="add('${userItem.value.email}')"><c:out value='${user.email}'/><span class=" glyphicon glyphicon-plus"></span></td>
           							</tr>	
      							</c:forEach>
 						    </tbody>
 					  	</table>
 					  </div>	
+					  
+					  <div class="col-md-9">
+						<table class="table table-hover">
+						    <thead>
+						      <tr>
+						      <th>Nom</th>
+						      <th>Email</th>
+						      <th>Supprimer un utilisateur</th>
+						      </tr>
+						    </thead>
+						    <tbody>
+						      <c:forEach var="userItem" items="${users}">
+     								<tr>
+          								<td><c:out value="${userItem.value.name}"/></td>
+          								<td><c:out value="${userItem.value.email}" /></td>
+          								<td onclick="location.href='delUser?emailUserToDel='"><c:out value='${user.email}'/><span class=" glyphicon glyphicon-remove"></span></td>
+          							</tr>	
+     							</c:forEach>
+						    </tbody>
+					  	</table>
+					  </div>	
+					  
 				 </div> 
 			</div>
 		</form>				 
 	</div>
+	<script type="text/javascript">
+	function add(email){
+	    document.getElementById("emailUserToAdd").value=email;
+	    document.getElementById("form").submit();
+	}
+	</script>
 </body>
 </html>

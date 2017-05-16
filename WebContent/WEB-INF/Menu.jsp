@@ -110,7 +110,7 @@ margin-bottom : -5px;
       					<p><span class="glyphicon glyphicon-road"></span>Covoiturage</p>
       						<li><a href="ListCovoiturage.jsp"><span class="glyphicon glyphicon-plane"></span>Rechercher / proposer un covoiturage</a></li>
         					<li><a href="ListUser.jsp"><span class="glyphicon glyphicon-envelope"></span>Contacter un utilisateur</a></li>
-        					<li><a href="Trajet.jsp"><span class="glyphicon glyphicon-random"></span>Gérer son trajet</a></li>                       
+        					<li><a href="addUsersTrajet"><span class="glyphicon glyphicon-random"></span>Gérer son trajet</a></li>                       
       					
     		</div>	
 </body>

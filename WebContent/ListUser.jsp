@@ -96,7 +96,7 @@ margin-left: -15px;
 						      <tr>
 						      <th>Nom</th>
 						      <th>Email</th>
-						      <th>Contacter l'utilisateur)</th>
+						      <th>Contacter l'utilisateur</th>
 						      </tr>
 						    </thead>
 						    <tbody>

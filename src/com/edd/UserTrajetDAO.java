@@ -3,16 +3,14 @@ package com.edd;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class UsersDAO {
-	static private ArrayList<User> listeUtilisateur = new ArrayList<User>();
-
-	public UsersDAO() {
-
+public class UserTrajetDAO {
+	static private ArrayList<User> listeUtilisateurTrajetComplete = new ArrayList<User>();
+	static private ArrayList<User> listeUtilisateurTrajetModifie = new ArrayList<User>();
+	public UserTrajetDAO() {		
 	}
-
+	
 	static public boolean ajouteUtilisateur(String nomUtil, String pwdUtil, String email, boolean fumeur, int nbCovoitureurs, String voie, String cp, String ville, double longitude, double lattitude, String nomMarker, int index, boolean isConducteur, boolean estSelectionne)  throws Exception{
 		if ((nomUtil != null) && (pwdUtil != null)) {
-			// TODO (inserted by : JFYVART / [11 mai 2017, 13:55:22] Modif new champs
 			User newUtil = new User(nomUtil, pwdUtil, email, true, 1, nomMarker, nomMarker, nomMarker, lattitude, lattitude, nomMarker, index, estSelectionne, estSelectionne);
 			if (ajouteUtilisateur(newUtil)) {
 				return true;
@@ -28,7 +26,7 @@ public class UsersDAO {
 	static public boolean ajouteUtilisateur(User newUtil) throws Exception {
 		boolean ajoutPossible = true;
 		String msgString = "";
-		for (User utilisateur : listeUtilisateur) {
+		for (User utilisateur : listeUtilisateurTrajetComplete) {
 			System.out.println("parcours liste des utilisateurs pour ajout");
 			// A t'on déjà un utilisateur ayant le même nom ?
 			if (utilisateur.getEmail().equalsIgnoreCase(newUtil.getEmail())) {
@@ -55,7 +53,7 @@ public class UsersDAO {
 		}
 		// Si les controles se sont bien passés : On ajoute l'utilisateur
 		if (ajoutPossible) {
-			listeUtilisateur.add(newUtil);
+			listeUtilisateurTrajetComplete.add(newUtil);
 			System.out.println("Ajout du nouvel utilisateur : " + newUtil.getName() + " / " + newUtil.getPassword() + " / " + newUtil.getEmail());
 		}
 
@@ -63,7 +61,7 @@ public class UsersDAO {
 	}
 
 	public static void initListeUser() {
-		if(listeUtilisateur.isEmpty()){
+		if(listeUtilisateurTrajetComplete.isEmpty()){
 			try {
 				User newUser1 =new User("Laurent Palmier","", "Laurent.Palmier@Magnus.fr", true, 1,"Place de la mairie", "31470", "Fonsorbes", 43.533329, 1.23333,"Laurent Palmier", 0, false, false);
 
@@ -88,10 +86,10 @@ public class UsersDAO {
 
 	public static HashMap<String, User> fillHashMapWithListUsers(String nameSearched){
 		HashMap<String, User> Users = new HashMap<String, User>();
-		if(listeUtilisateur.isEmpty()){
+		if(listeUtilisateurTrajetComplete.isEmpty()){
 			initListeUser();
 		}
-		for (User utilisateur : listeUtilisateur) {
+		for (User utilisateur : listeUtilisateurTrajetComplete) {
 			System.out.println("parcours liste des utilisateurs pour remplissage HashMap");
 			if (!"".equals(nameSearched)){
 				if (utilisateur.getName().equalsIgnoreCase(nameSearched)) {
@@ -105,24 +103,24 @@ public class UsersDAO {
 		return Users;
 	}
 
-	public static void deleteUser(String nameSearched) {
-		if(!listeUtilisateur.isEmpty()){
-			for (User utilisateur : listeUtilisateur) {
+	public static void deleteUserTrajet(String nameSearched) {
+		if(!listeUtilisateurTrajetComplete.isEmpty()){
+			for (User utilisateur : listeUtilisateurTrajetComplete) {
 				System.out.println("parcours liste des utilisateurs pour suppression de :" + nameSearched);
-				if (!"".equals(nameSearched)){							
+				//if (!"".equals(nameSearched)){
+				if (nameSearched.length()!=0){					
 					if (utilisateur.getEmail().equalsIgnoreCase(nameSearched)) {
-						listeUtilisateur.remove(utilisateur);
+						listeUtilisateurTrajetComplete.remove(utilisateur);
 						System.out.println("suppression de :" + utilisateur);
 						break;
 					}
 				}
 			}
 		}
-
 	}
 
 	public static void modifyUser(User userModifie){
-		for (User utilisateur : listeUtilisateur) {
+		for (User utilisateur : listeUtilisateurTrajetComplete) {
 			System.out.println("parcours liste des utilisateurs pour suppression de :" + userModifie.getName());
 			if (!"".equals(userModifie.getName())){
 				if (utilisateur.getName().equalsIgnoreCase(userModifie.getName())) {
@@ -133,5 +131,4 @@ public class UsersDAO {
 			}
 		}
 	}
-
 }
