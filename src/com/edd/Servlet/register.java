@@ -76,6 +76,8 @@ public class register extends HttpServlet {
 	public static final String CHAMP_ERRORS = "errors";
 	public static final String CHAMP_ERROR_STATUS = "errorStatus";
 
+	public static final String CHAMP_ERRORCONNECT_STATUS = "errorConnected";
+
 	public static final String CHAMP_ERROR_PWD_AFFICHAGE = "errorPwdHide";
 	public static final String CHAMP_ERROR_EMAIL_AFFICHAGE = "errorEmailHide";
 
@@ -116,6 +118,7 @@ public class register extends HttpServlet {
 		request.setAttribute(CHAMP_ERROR_EMAIL_AFFICHAGE, MSG_AFFICHAGE_HIDDEN);
 		request.setAttribute(CHAMP_ERROR_PWD_AFFICHAGE, MSG_AFFICHAGE_HIDDEN);
 		request.setAttribute(CHAMP_ERROR_STATUS, true);
+		request.setAttribute(CHAMP_ERRORCONNECT_STATUS, true);
 		// Ouverture de la page Welcome
 		request.getRequestDispatcher(this.URL_NAME).forward(request, response);
 	}
@@ -157,6 +160,7 @@ public class register extends HttpServlet {
 		User newUser=new User(this.nom,this.motDePasse1, this.email, false, 1, this.nomMarker, this.nomMarker, this.nomMarker, this.lattitude, this.lattitude, this.nomMarker, this.index, this.estSelectionne, this.estSelectionne);
 		request.setAttribute("newUser", newUser);
 		System.out.println(newUser.toString());
+		request.setAttribute(CHAMP_ERRORCONNECT_STATUS, true);
 
 		// Remplissage du hashmap  form
 		this.form.put(CHAMP_EMAIL, this.email);
@@ -258,6 +262,7 @@ public class register extends HttpServlet {
 			myCookie = new Cookie(this.COUNT_COOKIE_KEY+"_" + this.nom , "" + compteur);
 			response.addCookie(myCookie);
 			request.setAttribute(CHAMP_ERROR_STATUS, false);
+			request.setAttribute(CHAMP_ERRORCONNECT_STATUS, false);
 
 		}
 

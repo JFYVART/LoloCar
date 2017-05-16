@@ -38,6 +38,11 @@ function initMap() {
 		map : map
 	});
 
+//	$.get('myservlet', function(data) {
+//		alert(data);
+//	});
+	
+	
 	// Try HTML5 geolocation.
 	if (navigator.geolocation) {
 		navigator.geolocation.getCurrentPosition(function(position) {
@@ -69,7 +74,7 @@ function initVisuMap() {
 	arrivee = new google.maps.LatLng(43.533329, 1.53333);
 	/* option par défaut de la carte */
 	var myOptions = {
-		zoom : 10,
+		zoom :8,
 		mapTypeId : google.maps.MapTypeId.ROADMAP,
 		center : maison,
 

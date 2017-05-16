@@ -35,6 +35,8 @@ public class connect extends HttpServlet {
 	public static final String CHAMP_ERRORS = "errors";
 	public static final String CHAMP_ERROR_STATUS = "errorStatus";
 
+	public static final String CHAMP_ERRORCONNECT_STATUS = "errorConnected";
+
 	public static final String CHAMP_ERROR_PWD_AFFICHAGE = "errorPwdHide";
 	public static final String CHAMP_ERROR_EMAIL_AFFICHAGE = "errorEmailHide";
 
@@ -75,6 +77,7 @@ public class connect extends HttpServlet {
 		request.setAttribute(CHAMP_ERROR_EMAIL_AFFICHAGE, MSG_AFFICHAGE_HIDDEN);
 		request.setAttribute(CHAMP_ERROR_PWD_AFFICHAGE, MSG_AFFICHAGE_HIDDEN);
 		request.setAttribute(CHAMP_ERROR_STATUS, true);
+		request.setAttribute(CHAMP_ERRORCONNECT_STATUS, true);
 		// Ouverture de la page Welcome
 		request.getRequestDispatcher(this.URL_NAME).forward(request, response);
 	}
@@ -118,8 +121,11 @@ public class connect extends HttpServlet {
 			request.setAttribute(CHAMP_ERROR_PWD_AFFICHAGE, MSG_AFFICHAGE_VISIBLE);
 			request.setAttribute(CHAMP_ERROR_EMAIL_AFFICHAGE, MSG_AFFICHAGE_VISIBLE);
 			request.setAttribute(CHAMP_ERROR_STATUS, true);
+			request.setAttribute(CHAMP_ERRORCONNECT_STATUS, true);
 			msString ="couple (Login / password) inconnu";
 			request.getRequestDispatcher(this.URL_NAME).forward(request, response);
+		} else {
+			request.setAttribute(CHAMP_ERRORCONNECT_STATUS, false);
 		}
 
 		System.out.println(msString);
