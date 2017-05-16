@@ -13,6 +13,7 @@
 <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
 <script src="js/script.js" type="text/javascript" language="javascript"></script>
 <script src="js/google.js" type="text/javascript" language="javascript"></script>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 </head>
 
@@ -73,6 +74,7 @@ margin-left: -15px;
 		<input id="emailUserToAdd" name="emailUserToAdd" type="hidden"></input>	
 				<div class="row">
 					<div class="col-md-3">
+							<c:set var = "errorConnected" scope = "session" value = "${false}"/>
 							<c:import url="/WEB-INF/Menu.jsp" />
 					</div>
 					<div class="col-md-9">

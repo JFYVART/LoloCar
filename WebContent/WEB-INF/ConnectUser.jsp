@@ -13,6 +13,7 @@
 <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
 <script src="js/script.js" type="text/javascript" language="javascript"></script>
 <script src="js/google.js" type="text/javascript" language="javascript"></script>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 </head>
 
@@ -49,10 +50,7 @@ color:#5e91b2;
 				</div>
 				<div class="col-md-9">
 					<br>	
-					<c:import url="/WEB-INF/Form.jsp" />
-					<c:if test="${!errorStatus}">
-						<c:import url="/WEB-INF/Card.jsp" />
-					</c:if>
+					<c:import url="/WEB-INF/Connect.jsp" />
 				</div>
 			</div>	
 		</form>

@@ -13,6 +13,7 @@
 <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
 <script src="js/script.js" type="text/javascript" language="javascript"></script>
 <script src="js/google.js" type="text/javascript" language="javascript"></script>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 </head>
 
@@ -69,9 +70,10 @@ margin-left: -15px;
 
 <body>
 	<div class="container">
-		<form name="myListUser" method="post" action="listeUsers">	
+		<form name="myListUser" method="post" action="listeUsers">    	
 				<div class="row">
 					<div class="col-md-3">
+							<c:set var = "errorConnected" scope = "session" value = "${false}"/>
 							<c:import url="/WEB-INF/Menu.jsp" />
 					</div>
 					<div class="col-md-9">
@@ -104,7 +106,7 @@ margin-left: -15px;
      								<tr>
           								<td><c:out value="${userItem.value.name}"/></td>
           								<td><c:out value="${userItem.value.email}" /></td>
-          								<td onclick="location.href='delUser?emailUserToDel='"><c:out value='${user.email}'/><span class="glyphicon glyphicon-envelope"></span></td>
+          								<td onclick="javascript: window.location.href='mailto:${userItem.value.email}?subject=Oboulot : Covoiturage';"><c:out value='${user.email}'/><span class="glyphicon glyphicon-envelope"></span></td>
           							</tr>	
      							</c:forEach>
 						    </tbody>

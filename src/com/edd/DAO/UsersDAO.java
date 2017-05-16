@@ -1,7 +1,9 @@
-package com.edd;
+package com.edd.DAO;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+
+import com.edd.Entity.User;
 
 public class UsersDAO {
 	static private ArrayList<User> listeUtilisateur = new ArrayList<User>();
@@ -65,18 +67,22 @@ public class UsersDAO {
 	public static void initListeUser() {
 		if(listeUtilisateur.isEmpty()){
 			try {
-				User newUser1 =new User("Laurent Palmier","", "Laurent.Palmier@Magnus.fr", true, 1,"Place de la mairie", "31470", "Fonsorbes", 43.533329, 1.23333,"Laurent Palmier", 0, false, false);
+				User newUser1 =new User("Laurent Palmier","123456789", "Laurent.Palmier@Magnus.fr", true, 1,"Place de la mairie", "31470", "Fonsorbes", 43.533329, 1.23333,"Laurent Palmier", 0, false, false);
 
 				ajouteUtilisateur(newUser1);
 				System.out.println("user1 :" + newUser1);
 
-				User newUser2 =new User("JF Yvart","", "JF.Yvart@Magnus.fr", true, 1,"8 impasse du Cinsault", "31470", "Saint Lys", 43.51667, 1.2,"",1,true,false );
+				User newUser2 =new User("JF Yvart","123456789", "JF.Yvart@Magnus.fr", true, 1,"8 impasse du Cinsault", "31470", "Saint Lys", 43.51667, 1.2,"",1,true,false );
 				ajouteUtilisateur(newUser2);
 				System.out.println("user2 :" + newUser2);
 
-				User newUser3 =new User("Sybille Cazaux","", "Sybille.Cazaux@Magnus.fr", false, 1, "Place de la mairie", "31000", "Toulouse", 43.6042600, 1.4436700,"",2,false, false );
+				User newUser3 =new User("Sybille Cazaux","123456789", "Sybille.Cazaux@Magnus.fr", false, 1, "Place de la mairie", "31000", "Toulouse", 43.6042600, 1.4436700,"",2,false, false );
 				ajouteUtilisateur(newUser3);
 				System.out.println("user3 :" + newUser3);
+
+				User newUser4 =new User("Berger - Levrault","123456789", "help.Covoiturage@Magnus.fr", false, 1, "64 av Edmond Rostand", "31000", "Toulouse", 43.533329, 1.53333,"",3,true, false );
+				ajouteUtilisateur(newUser4);
+				System.out.println("user4 :" + newUser4);
 
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
@@ -105,12 +111,32 @@ public class UsersDAO {
 		return Users;
 	}
 
+
+	public static Boolean isUserConnected(String email, String pwd){
+		boolean response = false;
+		if(listeUtilisateur.isEmpty()){
+			initListeUser();
+		}
+		for (User utilisateur : listeUtilisateur) {
+			System.out.println("parcours liste des utilisateurs pour recherche utilisateur");
+			if ((!"".equals(email))&&(!"".equals(pwd))){
+				if (utilisateur.getEmail().equalsIgnoreCase(email)) {
+					if (utilisateur.getPassword().equalsIgnoreCase(pwd)) {
+						response = true;
+					}
+				}
+			}
+
+		}
+		return response;
+	}
+
 	public static void deleteUser(String nameSearched) {
 		if(!listeUtilisateur.isEmpty()){
 			for (User utilisateur : listeUtilisateur) {
 				System.out.println("parcours liste des utilisateurs pour suppression de :" + nameSearched);
-				if (!"".equals(nameSearched)){							
-					if (utilisateur.getEmail().equalsIgnoreCase(nameSearched)) {
+				if (!"".equals(nameSearched)){
+					if (utilisateur.getName().equalsIgnoreCase(nameSearched)) {
 						listeUtilisateur.remove(utilisateur);
 						System.out.println("suppression de :" + utilisateur);
 						break;

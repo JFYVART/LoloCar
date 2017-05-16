@@ -17,7 +17,7 @@ body {
 	padding: 10px;
 }
 
-.text-center {
+.text-center, h3 {
 	font-size: 26px;
 	color: #5e91b2;
 	opacity: 0.8;
@@ -40,21 +40,29 @@ body {
 }
 
 .glyphicon-user, .glyphicon-log-in, .glyphicon-erase,
-	.glyphicon-education {
+.glyphicon-education {
 	color: #5e91b2;
 }
 
 #nbCov {
    font-size: 15px;
+   font-style: initial;
    color: #5e91b2;
-    opacity: 0.8;
+   opacity: 0.8;
 }
 
-#bFumeur {
+h4 {
    font-size: 15px;
    color: #5e91b2;
-    opacity: 0.8;
-    margin-left: 20px;
+   opacity: 0.8;
+   margin-left: 20px;
+}
+
+#fumeurUtilisateur, #isConducteurUtilisateur {
+   font-size: 15px;
+   color: #5e91b2;
+   opacity: 0.8;
+   margin-left: 35px;
 }
 
 .btn-default {
@@ -74,6 +82,7 @@ body {
 		<div class="row">
 			<div class="col-sm-6">
 				<div class="row">
+					<h3>- Compte</h3>
 					<div class="col-sm-12 input-group">
 						<span class="input-group-addon"><i
 							class="glyphicon glyphicon-envelope"></i></span> <input
@@ -108,12 +117,14 @@ body {
 							value="${form['nameUtilisateur']}" placeholder="Nom utilisateur">
 					</div>
 					<br>
-					<div class = "container col-sm-12" id="nbCov">
-						<div class = "row col-sm-8">
-						<label class="col-sm-8" for="sel1">Nombre de covoitureurs:</label>	
-						<div class=" form-group col-sm-4 ">
+					<h3>- Conditions trajet</h3>
+					<div class = "container bg-grey col-sm-12" id="nbCov">
+						<div class = "row col-sm-6">
+						<h4>Nombre de covoitureurs:<h4>
+						</div>	
+						<div class=" form-group col-sm-3 ">
 						  	
-						  	<select class="form-control col-sm-6" id="sel1">
+						  	<select class="form-control col-sm-12" id="nbCovoituresUtilisateur" name = "nbCovoituresUtilisateur">
 						    	<option>2</option>
 						    	<option>3</option>
 						    	<option>4</option>
@@ -125,17 +136,49 @@ body {
 						    	<option>10</option>
 						  	</select>
 						  	</div>
-						</div>
+						
 					</div>
 					<br>
-					<div class="col-sm-12 input-group-fumeur" id="bFumeur">						
+					<div class="container bg-grey col-sm-6 input-group" id ="fumeurUtilisateur" name="fumeurUtilisateur">						
 							<br>							
-								<label class="radio-inline"><input type="radio" value="oui" name="fumeur">Fumeur</label> 
-								<label class="radio-inline"><input type="radio" value="non" name="fumeur" checked>Non fumeur</label>						
+								<label class="radio-inline"><input type="radio" value="oui" >Fumeur</label> 
+								<label class="radio-inline"><input type="radio" value="non" checked>Non fumeur</label>						
 							<br>
 						
 					</div>
-					
+					<br>
+					<div class="container bg-grey col-sm-6 input-group" id="isConducteurUtilisateur" name = "isConducteurUtilisateur">						
+							<br>							
+								<label class="radio-inline"><input type="radio" value="oui" checked>Conducteur</label> 
+								<label class="radio-inline"><input type="radio" value="non" >Passager</label>						
+							<br>
+						
+					</div>
+					<br>
+					<h3>- Adresse</h3>
+					<div class="col-sm-8 input-group">
+						<span class="input-group-addon"><i
+							class="glyphicon glyphicon glyphicon-flag"></i></span> <input
+							class="form-control" id=voieUtilisateur type="texte"
+							name="voieUtilisateur" value="${form['voieUtilisateur']}"
+							placeholder="Rue" required="required">
+					</div>
+					<br>
+					<div class="col-sm-4 input-group">
+						<span class="input-group-addon"><i
+							class="glyphicon glyphicon glyphicon-flag"></i></span> <input
+							class="form-control" id=cpUtilisateur type="texte"
+							name="cpUtilisateur" value="${form['cpUtilisateur']}"
+							placeholder="Code postal" required="required">
+					</div>
+					<br>
+					<div class="col-sm-8 input-group">
+						<span class="input-group-addon"><i
+							class="glyphicon glyphicon glyphicon-flag"></i></span> <input
+							class="form-control" id=villeUtilisateur type="texte"
+							name="villeUtilisateur" value="${form['villeUtilisateur']}"
+							placeholder="Ville" required="required">
+					</div>
 					
 					<div class="${msgHide}" style="margin-left: 30px">${msgUtilisateur}</div>
 					<br>

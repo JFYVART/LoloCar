@@ -15,6 +15,9 @@
 <script src="js/google.js" type="text/javascript" language="javascript"></script>
 <!--importation de l'API google MAP Version 3-->
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA5Js00Q0b8fEtHzF_JN5NLBU2mH5p8v0s&callback=initMap" async defer></script>
+
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 </head>
 
@@ -45,6 +48,7 @@ font-size: 8px;
 		<form name="myForm">
 			<div class="row">
 				<div class="col-md-3">
+					<c:set var = "errorConnected" scope = "session" value = "${true}"/>
 					<c:import url="/WEB-INF/Menu.jsp" />
 				</div>
 				<div class="col-md-9">
@@ -52,7 +56,7 @@ font-size: 8px;
 					
 					<h3><i class="glyphicon glyphicon-transfer"></i> Carte des covoiturages en cours</h3>
 					</div>	
-					<div class="col-md-6" id="divMap" style="float:left;width:845px; height:600px"></div>		
+					<div class="col-md-6" id="divMap" style="float:left;width:845px; height:600px"></div>	
 	  		  </div>				
 		</form>
 	</div>

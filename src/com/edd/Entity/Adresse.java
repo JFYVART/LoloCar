@@ -1,4 +1,4 @@
-package com.edd;
+package com.edd.Entity;
 
 public class Adresse {
 	private String voie;

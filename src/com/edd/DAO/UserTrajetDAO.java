@@ -1,7 +1,9 @@
-package com.edd;
+package com.edd.DAO;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+
+import com.edd.Entity.User;
 
 public class UserTrajetDAO {
 	static private ArrayList<User> listeUtilisateurTrajetComplete = new ArrayList<User>();
