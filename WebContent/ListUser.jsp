@@ -70,7 +70,7 @@ margin-left: -15px;
 
 <body>
 	<div class="container">
-		<form name="myListUser" method="post" action="listeUsers">	
+		<form name="myListUser" method="post" action="listeUsers">    	
 				<div class="row">
 					<div class="col-md-3">
 							<c:set var = "errorConnected" scope = "session" value = "${false}"/>
@@ -106,7 +106,7 @@ margin-left: -15px;
      								<tr>
           								<td><c:out value="${userItem.value.name}"/></td>
           								<td><c:out value="${userItem.value.email}" /></td>
-          								<td onclick="location.href='mailUser?emailUserToDel='"><c:out value='${user.email}'/><span class="glyphicon glyphicon-envelope"></span></td>
+          								<td onclick="javascript: window.location.href='mailto:${userItem.value.email}?subject=Oboulot : Covoiturage';"><c:out value='${user.email}'/><span class="glyphicon glyphicon-envelope"></span></td>
           							</tr>	
      							</c:forEach>
 						    </tbody>
