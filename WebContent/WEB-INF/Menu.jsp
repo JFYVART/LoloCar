@@ -111,7 +111,7 @@ margin-bottom : -5px;
         			<c:if test="${!errorConnected}">
         			<li id = "Deconnection"><a href="Index.jsp"><span class="glyphicon glyphicon-home"></span>Deconnection</a></li>
   						<p><span class="glyphicon glyphicon-user"></span>Compte utilisateur</p>
-							<li><a href=<c:url value="/modify"/>><span class="glyphicon glyphicon-edit"></span>Modifier / supprimer son compte</a></li> 
+							<li><a href=<c:url value="/modify"/>><span class="glyphicon glyphicon-edit"></span>Supprimer son compte</a></li> 
 						<p><span class="glyphicon glyphicon-road"></span>Covoiturage</p>
       						<li><a href="ListCovoiturage.jsp"><span class="glyphicon glyphicon-plane"></span>Rechercher / proposer un covoiturage</a></li>
         					<li><a href="ListUser.jsp"><span class="glyphicon glyphicon-envelope"></span>Contacter un utilisateur</a></li>

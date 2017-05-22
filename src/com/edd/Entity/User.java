@@ -2,7 +2,7 @@ package com.edd.Entity;
 
 public class User {
 
-
+	private Long id;
 	private String name;
 	private String password;
 	private String email;
@@ -17,6 +17,7 @@ public class User {
 	}
 
 	public User(String nom, String pwd, String email, boolean fumeur, int nbCovoitureurs, String voie, String cp, String ville, double longitude, double lattitude, String nomMarker, int index, boolean isConducteur, boolean estSelectionne) {
+		this.id = 99L;
 		this.name = nom;
 		this.password = pwd;
 		this.email = email;
@@ -97,6 +98,16 @@ public class User {
 
 	public void setConducteur(boolean isConducteur) {
 		this.isConducteur = isConducteur;
+	}
+
+
+
+	public Long getId() {
+		return this.id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	@Override

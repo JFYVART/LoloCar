@@ -24,14 +24,7 @@ public class listeUsers extends HttpServlet {
 
 	private final String URL_NAME = "ListUser.jsp";
 
-	public static final String CHAMP_EMAIL = "emailUtilisateur";
 	private String email;
-	public static final String CHAMP_MSG_UTIL = "msgUtilisateur";
-	public static final String CHAMP_MSG_UTIL_AFFICHAGE = "msgHide";
-
-
-	public static final String MSG_AFFICHAGE_VISIBLE = "bg-success col-sm-12";
-	public static final String MSG_AFFICHAGE_HIDDEN = "hidden";
 
 	HashMap<String, User> Users = new HashMap<String, User>();
 
@@ -51,7 +44,7 @@ public class listeUsers extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		/* Récupération des champs du formulaire. */
-		request.setAttribute(CHAMP_MSG_UTIL_AFFICHAGE, MSG_AFFICHAGE_HIDDEN);
+		request.setAttribute(Constantes.CHAMP_MSG_UTIL_AFFICHAGE, Constantes.MSG_AFFICHAGE_HIDDEN);
 		// Ouverture de la page Welcome
 		request.getRequestDispatcher(this.URL_NAME).forward(request, response);
 		System.out.println("do get listeUsers");
@@ -69,8 +62,8 @@ public class listeUsers extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		/* Récupération des champs du formulaire. */
-		this.email = request.getParameter(CHAMP_EMAIL);
-		request.setAttribute(CHAMP_EMAIL, this.email);
+		this.email = request.getParameter(Constantes.CHAMP_EMAIL);
+		request.setAttribute(Constantes.CHAMP_EMAIL, this.email);
 
 		this.Users = UsersDAO.fillHashMapWithListUsers(this.email);
 

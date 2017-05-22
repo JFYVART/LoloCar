@@ -195,9 +195,9 @@ function utilisateursProcheDuTrajet(monTrajet) {
 // Data for the markers consisting of a name, a LatLng and a zIndex for the
 // order in which these markers should display on top of each other.
 var Users = [
-["Laurent Palmier", 43.533329, 1.23333, 1, 0],
-["JF Yvart", 43.51667, 1.2, 2, -1],
-["Sybille Cazaux", 43.6042600, 1.4436700, 3, 0]
+["Laurent Palmier", 43.533329, 1.23333, 1, 0,"Laurent.Palmier@Magnus.fr"],
+["JF Yvart", 43.51667, 1.2, 2, -1], "JF.Yvart@Magnus.fr",
+["Sybille Cazaux", 43.6042600, 1.4436700, 3, 0, "Sybille.Cazaux@Magnus.fr"]
 ];
 
 function setMarkers(map) {

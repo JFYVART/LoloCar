@@ -131,7 +131,42 @@ public class UsersDAO {
 		return response;
 	}
 
-	public static void deleteUser(String nameSearched) {
+	public static Long getIdUserConnected(String email, String pwd){
+		Long idUser = 0L;
+		if(listeUtilisateur.isEmpty()){
+			initListeUser();
+		}
+		for (User utilisateur : listeUtilisateur) {
+			System.out.println("parcours liste des utilisateurs pour recherche utilisateur");
+			if ((!"".equals(email))&&(!"".equals(pwd))){
+				if (utilisateur.getEmail().equalsIgnoreCase(email)) {
+					if (utilisateur.getPassword().equalsIgnoreCase(pwd)) {
+						idUser = utilisateur.getId();
+					}
+				}
+			}
+
+		}
+		return idUser;
+	}
+
+
+	public static User getUserById(Long idUser){
+		User userSearched = null;
+		if(listeUtilisateur.isEmpty()){
+			initListeUser();
+		}
+		for (User utilisateur : listeUtilisateur) {
+			System.out.println("parcours liste des utilisateurs pour recherche utilisateur");
+			if (utilisateur.getId() == (idUser)) {
+				userSearched = utilisateur;
+			}
+		}
+		return userSearched;
+	}
+
+	public static boolean deleteUser(String nameSearched) {
+		boolean result = false;
 		if(!listeUtilisateur.isEmpty()){
 			for (User utilisateur : listeUtilisateur) {
 				System.out.println("parcours liste des utilisateurs pour suppression de :" + nameSearched);
@@ -139,11 +174,14 @@ public class UsersDAO {
 					if (utilisateur.getName().equalsIgnoreCase(nameSearched)) {
 						listeUtilisateur.remove(utilisateur);
 						System.out.println("suppression de :" + utilisateur);
+						result = true;
 						break;
 					}
 				}
 			}
 		}
+
+		return result;
 
 	}
 

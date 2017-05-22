@@ -34,6 +34,7 @@ padding-right: 30px;
 }
 .glyphicon-education {
 color:#5e91b2;
+
 }
 
 

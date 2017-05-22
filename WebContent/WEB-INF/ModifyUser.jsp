@@ -19,21 +19,69 @@
 
 <style>
 
-.text-center {
-font-size:26px;
-color:#5e91b2;
-opacity:0.8;
-margin-bottom: 0px;
+body {
+	background-color: #b3cadb;
+	font: 16px 'Ubuntu', sans-serif;;
+	line-height: 1.4;
+	padding: 10px;
 }
 
-.nav-pills{
-margin-bottom: 15px;
-margin-left: 15px;
-padding-right: 30px;
-
+.text-center, h3 {
+	font-size: 26px;
+	color: #5e91b2;
+	opacity: 0.8;
 }
+
+.input-group {
+	border-radius: 0;
+	margin-left: 30px;
+	text-transform: uppercase;
+	padding-left: 70px;
+}
+
+#btnGrp {
+	margin-top: 10px;
+	margin-left: 0px;
+}
+
+.glyphicon {
+	color: #d1625c;
+}
+
+.glyphicon-user, .glyphicon-log-in, .glyphicon-erase,
 .glyphicon-education {
-color:#5e91b2;
+	color: #5e91b2;
+}
+
+#nbCov {
+   font-size: 15px;
+   font-style: initial;
+   color: #5e91b2;
+   opacity: 0.8;
+}
+
+h4 {
+   font-size: 15px;
+   color: #5e91b2;
+   opacity: 0.8;
+   margin-left: 20px;
+}
+
+#fumeurUtilisateur, #isConducteurUtilisateur {
+   font-size: 15px;
+   color: #5e91b2;
+   opacity: 0.8;
+   margin-left: 35px;
+}
+
+.btn-default {
+	box-shadow: 1px 1px 1px #92a7b7;
+	background-color: #e6ecf2;
+	opacity: 0.8;
+}
+
+.bg-success {
+	margin-left: 15px;
 }
 
 
@@ -43,18 +91,33 @@ color:#5e91b2;
 <body>
 	<div class="container">
 		<form name="myForm" method="post" action="modify">
-			
+		<input id="emailUserToDel" name="emailUserToDel" type="hidden"></input>	
 			<div class="row">
 				<div class="col-md-3">
+					<c:set var = "errorConnected" scope = "session" value = "${false}"/>
 					<c:import url="/WEB-INF/Menu.jsp" />
 				</div>
 				<div class="col-md-9">
 					<br>	
-					<c:import url="/WEB-INF/Form.jsp" />
-					<c:if test="${!errorStatus}">
-						<c:import url="/WEB-INF/Card.jsp" />
-					</c:if>
+					<c:import url="/WEB-INF/Card.jsp" />
+					
+					<div class="container bg-grey">
+						<div class="row">
+							<p></p>
+							<div class="col-sm-12">
+								<div class="row" id="btnGrp">
+									<div class="col-sm-6 form-group">
+										<button class="btn btn-default btn-md col-sm-8" type="submit">
+											<a style="vertical-align: middle"><span
+												class="glyphicon glyphicon-remove"></span></a>
+										</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
+				
 			</div>	
 		</form>
 	</div>
