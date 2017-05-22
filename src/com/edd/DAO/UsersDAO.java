@@ -79,10 +79,6 @@ public class UsersDAO {
 	}
 
 	public static void initListeUser() {
-
-		// On charge la liste depuis la BDD
-		getUserFromBDD();
-
 		// Si aucun utilisateur n'est en base : On la remplit manuellement.
 		if(listeUtilisateur.isEmpty()){
 			try {

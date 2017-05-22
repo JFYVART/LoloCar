@@ -1,34 +1,20 @@
 package com.edd.Entity;
 
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
 
-import javax.persistence.CollectionTable;
-import javax.persistence.Column;
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.MapKeyJoinColumn;
-
-@Entity
 public class Route implements Serializable {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private int nbParticpant;
-	@ElementCollection
-	@CollectionTable(name="MARKER_PARTICIPANT")
-	@MapKeyJoinColumn(name="NAME")
-	@Column(name="PARTICIPANT")
-	private Map<String, Marker> listeParticipant;
-	@ElementCollection
-	@CollectionTable(name="MARKER_COVOITURAGE")
-	@MapKeyJoinColumn(name="POSITION")
-	@Column(name="POSITIONROUTE")
-	private Map<Integer, Marker> routeCovoiturage;
+	//	@ElementCollection
+	//	@CollectionTable(name="MARKER_PARTICIPANT")
+	//	@MapKeyJoinColumn(name="NAME")
+	//	@Column(name="PARTICIPANT")
+	//	private Map<String, Marker> listeParticipant;
+	//	@ElementCollection
+	//	@CollectionTable(name="MARKER_COVOITURAGE")
+	//	@MapKeyJoinColumn(name="POSITION")
+	//	@Column(name="POSITIONROUTE")
+	//	private Map<Integer, Marker> routeCovoiturage;
 	private ConditionsTrajet conditionsCovoiturage;
 	private User conducteur;
 	private Marker depart;
@@ -41,13 +27,13 @@ public class Route implements Serializable {
 		this.conducteur = conducteur;
 		this.nbParticpant = nbParticpant;
 		this.depart = depart;
-		this.listeParticipant = new HashMap<String, Marker>();
-		this.routeCovoiturage = new HashMap<Integer, Marker>();
-		// On ajoute le conducteur comme point de départ
-		this.listeParticipant.put(conducteur.getName(), depart);
-		this.routeCovoiturage.put(0,depart);
-		// On ajoute également l'arrivée.
-		this.routeCovoiturage.put(nbParticpant+1,this.arrivee);
+		//		this.listeParticipant = new HashMap<String, Marker>();
+		//		this.routeCovoiturage = new HashMap<Integer, Marker>();
+		//		// On ajoute le conducteur comme point de départ
+		//		this.listeParticipant.put(conducteur.getName(), depart);
+		//		this.routeCovoiturage.put(0,depart);
+		//		// On ajoute également l'arrivée.
+		//		this.routeCovoiturage.put(nbParticpant+1,this.arrivee);
 
 	}
 
@@ -63,21 +49,21 @@ public class Route implements Serializable {
 		this.nbParticpant = nbParticpant;
 	}
 
-	public Map<String, Marker> getListeParticipant() {
-		return this.listeParticipant;
-	}
-
-	public void setListeParticipant(Map<String, Marker> listeParticipant) {
-		this.listeParticipant = listeParticipant;
-	}
-
-	public Map<Integer, Marker> getRouteCovoiturage() {
-		return this.routeCovoiturage;
-	}
-
-	public void setRouteCovoiturage(Map<Integer, Marker> routeCovoiturage) {
-		this.routeCovoiturage = routeCovoiturage;
-	}
+	//	public Map<String, Marker> getListeParticipant() {
+	//		return this.listeParticipant;
+	//	}
+	//
+	//	public void setListeParticipant(Map<String, Marker> listeParticipant) {
+	//		this.listeParticipant = listeParticipant;
+	//	}
+	//
+	//	public Map<Integer, Marker> getRouteCovoiturage() {
+	//		return this.routeCovoiturage;
+	//	}
+	//
+	//	public void setRouteCovoiturage(Map<Integer, Marker> routeCovoiturage) {
+	//		this.routeCovoiturage = routeCovoiturage;
+	//	}
 
 	public ConditionsTrajet getConditionsCovoiturage() {
 		return this.conditionsCovoiturage;

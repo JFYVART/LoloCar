@@ -2,18 +2,10 @@ package com.edd.Entity;
 
 import java.io.Serializable;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
-@Entity
 public class Marker implements Serializable {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private Double longitude;
-	private Double lattitude;
+	private double longitude;
+	private double lattitude;
 	private String nomBalise;
 	private int index;
 	private boolean faitPartieCovoiturage;

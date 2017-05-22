@@ -2,18 +2,7 @@ package com.edd.Entity;
 
 import java.io.Serializable;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
-
-@Entity
 public class User implements Serializable {
-
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String name;
 	private String password;
@@ -81,7 +70,6 @@ public class User implements Serializable {
 		this.email = email;
 	}
 
-	@OneToOne
 	public ConditionsTrajet getConditionsTrajet() {
 		return this.conditionsTrajet;
 	}
@@ -90,7 +78,6 @@ public class User implements Serializable {
 		this.conditionsTrajet = conditionsTrajet;
 	}
 
-	@OneToOne
 	public Adresse getAdresseUser() {
 		return this.adresseUser;
 	}
@@ -99,7 +86,6 @@ public class User implements Serializable {
 		this.adresseUser = adresseUser;
 	}
 
-	@OneToOne
 	public Route getCovoituragePropose() {
 		return this.covoituragePropose;
 	}
