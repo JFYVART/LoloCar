@@ -1,15 +1,28 @@
 package com.edd.Entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class ConditionsTrajet {
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
+@Entity
+public class ConditionsTrajet implements Serializable {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 	private boolean fumeur;
 	private int nbCovoitureurs;
+	@Temporal(TemporalType.DATE)
 	private Date dateCovoiturage;
 	private int rayon;
 
 	public static final int RAYON = 10;
+	private static final long serialVersionUID = 1L;
 
 	public ConditionsTrajet(int nbCovoitureurs, boolean fumeur) {
 		this.fumeur = fumeur;
@@ -17,16 +30,18 @@ public class ConditionsTrajet {
 		this.dateCovoiturage = new Date();
 		this.rayon = RAYON;
 	}
+	public ConditionsTrajet() {
+	}
 
-	protected void setFumeur(boolean fumeur) {
+	public void setFumeur(boolean fumeur) {
 		this.fumeur = fumeur;
 	}
 
-	protected void setNbCovoitureurs(int nbCovoitureurs) {
+	public void setNbCovoitureurs(int nbCovoitureurs) {
 		this.nbCovoitureurs = nbCovoitureurs;
 	}
 
-	protected void setDateCovoiturage(Date dateCovoiturage) {
+	public void setDateCovoiturage(Date dateCovoiturage) {
 		this.dateCovoiturage = dateCovoiturage;
 	}
 
@@ -48,6 +63,15 @@ public class ConditionsTrajet {
 
 	public void setRayon(int rayon) {
 		this.rayon = rayon;
+	}
+
+
+	public Long getId() {
+		return this.id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 }

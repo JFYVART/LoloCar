@@ -1,12 +1,26 @@
 package com.edd.DAO;
 
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
+import javax.persistence.Persistence;
+import javax.persistence.Query;
+
+import com.edd.Entity.Adresse;
+import com.edd.Entity.ConditionsTrajet;
+import com.edd.Entity.Route;
 import com.edd.Entity.User;
 
 public class UsersDAO {
 	static private ArrayList<User> listeUtilisateur = new ArrayList<User>();
+	static private EntityManagerFactory emf = Persistence.createEntityManagerFactory("LoloCar");
+	static private EntityManager em = emf.createEntityManager();
+	static private EntityTransaction transaction = em.getTransaction() ;
 
 	public UsersDAO() {
 
@@ -65,6 +79,11 @@ public class UsersDAO {
 	}
 
 	public static void initListeUser() {
+
+		// On charge la liste depuis la BDD
+		getUserFromBDD();
+
+		// Si aucun utilisateur n'est en base : On la remplit manuellement.
 		if(listeUtilisateur.isEmpty()){
 			try {
 				User newUser1 =new User("Laurent Palmier","123456789", "Laurent.Palmier@Magnus.fr", true, 1,"Place de la mairie", "31470", "Fonsorbes", 43.533329, 1.23333,"Laurent Palmier", 0, false, false);
@@ -90,6 +109,38 @@ public class UsersDAO {
 			}
 		}
 
+	}
+
+
+	private static void getUserFromBDD() {
+		Query q=em.createQuery("SELECT * FROM USERS u ");
+		User newUser;
+		Adresse adresseUser;
+		ConditionsTrajet conditionsTrajetUser;
+		Route covoiturageProposeUser;
+
+		transaction.begin();
+		List<ResultSet> rs= q.getResultList();
+		for (ResultSet resultSet : rs) {
+			newUser = new User();
+			newUser.setName(((User)resultSet).getName());
+			newUser.setEmail(((User)resultSet).getEmail());
+			newUser.setId(((User)resultSet).getId());
+			newUser.setPassword(((User)resultSet).getPassword());
+			newUser.setConducteur(((User)resultSet).isConducteur());
+			newUser.setAdresseUser(((User)resultSet).getAdresseUser());
+			newUser.setConditionsTrajet(((User)resultSet).getConditionsTrajet());
+			newUser.setCovoituragePropose(((User)resultSet).getCovoituragePropose());
+
+			try {
+				ajouteUtilisateur(newUser);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			System.out.println("user1 :" + newUser);
+		}
+		transaction.commit();
 	}
 
 	public static HashMap<String, User> fillHashMapWithListUsers(String nameSearched){
@@ -173,6 +224,7 @@ public class UsersDAO {
 				if (!"".equals(nameSearched)){
 					if (utilisateur.getName().equalsIgnoreCase(nameSearched)) {
 						listeUtilisateur.remove(utilisateur);
+						delUserFromBDD(utilisateur.getId());
 						System.out.println("suppression de :" + utilisateur);
 						result = true;
 						break;
@@ -183,6 +235,14 @@ public class UsersDAO {
 
 		return result;
 
+	}
+
+	private static void delUserFromBDD(Long id) {
+		Query q=em.createQuery("DELETE FROM USERS u WHERE u.id = :idUser");
+		q.setParameter("idUser", id);
+		transaction.begin();
+		q.executeUpdate();
+		transaction.commit();
 	}
 
 	public static void modifyUser(User userModifie){

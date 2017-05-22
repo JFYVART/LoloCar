@@ -1,18 +1,31 @@
 package com.edd.Entity;
 
-public class Marker {
-	private double longitude;
-	private double lattitude;
+import java.io.Serializable;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
+public class Marker implements Serializable {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	private Double longitude;
+	private Double lattitude;
 	private String nomBalise;
 	private int index;
 	private boolean faitPartieCovoiturage;
 	private boolean estConducteur;
 
+	private static final long serialVersionUID = 1L;
+
 	public static final Marker travail = new Marker(43.533329, 1.53333, "Berger-Levrault", 99, false, false);
 
 	public Marker() {
-		this.longitude = 0f;
-		this.lattitude = 0f;
+		this.longitude = 0d;
+		this.lattitude = 0d;
 		this.nomBalise = "";
 		this.index = 0;
 		this.faitPartieCovoiturage = false;
@@ -47,11 +60,11 @@ public class Marker {
 		return this.lattitude;
 	}
 
-	protected void setLongitude(double longitude) {
+	public void setLongitude(double longitude) {
 		this.longitude = longitude;
 	}
 
-	protected void setLattitude(double lattitude) {
+	public void setLattitude(double lattitude) {
 		this.lattitude = lattitude;
 	}
 
@@ -59,7 +72,7 @@ public class Marker {
 		return this.nomBalise;
 	}
 
-	protected void setNomBalise(String nomBalise) {
+	public void setNomBalise(String nomBalise) {
 		this.nomBalise = nomBalise;
 	}
 
@@ -67,7 +80,7 @@ public class Marker {
 		return this.index;
 	}
 
-	protected void setIndex(int index) {
+	public void setIndex(int index) {
 		this.index = index;
 	}
 
@@ -75,7 +88,7 @@ public class Marker {
 		return this.faitPartieCovoiturage;
 	}
 
-	protected void setFaitPartieCovoiturage(boolean faitPartieCovoiturage) {
+	public void setFaitPartieCovoiturage(boolean faitPartieCovoiturage) {
 		this.faitPartieCovoiturage = faitPartieCovoiturage;
 	}
 
@@ -83,10 +96,16 @@ public class Marker {
 		return this.estConducteur;
 	}
 
-	protected void setEstConducteur(boolean estConducteur) {
+	public void setEstConducteur(boolean estConducteur) {
 		this.estConducteur = estConducteur;
 	}
 
+	public Long getId() {
+		return this.id;
+	}
 
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 }

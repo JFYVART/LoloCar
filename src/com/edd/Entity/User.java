@@ -1,7 +1,19 @@
 package com.edd.Entity;
 
-public class User {
+import java.io.Serializable;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+
+@Entity
+public class User implements Serializable {
+
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String name;
 	private String password;
@@ -11,13 +23,14 @@ public class User {
 	private Route covoituragePropose;
 	private boolean isConducteur;
 
+	private static final long serialVersionUID = 1L;
+
 
 	public User() {
 
 	}
 
 	public User(String nom, String pwd, String email, boolean fumeur, int nbCovoitureurs, String voie, String cp, String ville, double longitude, double lattitude, String nomMarker, int index, boolean isConducteur, boolean estSelectionne) {
-		this.id = 99L;
 		this.name = nom;
 		this.password = pwd;
 		this.email = email;
@@ -57,33 +70,36 @@ public class User {
 		return this.email;
 	}
 
-	protected void setName(String name) {
+	public void setName(String name) {
 		this.name = name;
 	}
 
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	protected void setEmail(String email) {
+	public void setEmail(String email) {
 		this.email = email;
 	}
 
+	@OneToOne
 	public ConditionsTrajet getConditionsTrajet() {
 		return this.conditionsTrajet;
 	}
 
-	protected void setConditionsTrajet(ConditionsTrajet conditionsTrajet) {
+	public void setConditionsTrajet(ConditionsTrajet conditionsTrajet) {
 		this.conditionsTrajet = conditionsTrajet;
 	}
 
+	@OneToOne
 	public Adresse getAdresseUser() {
 		return this.adresseUser;
 	}
 
-	protected void setAdresseUser(Adresse adresseUser) {
+	public void setAdresseUser(Adresse adresseUser) {
 		this.adresseUser = adresseUser;
 	}
 
+	@OneToOne
 	public Route getCovoituragePropose() {
 		return this.covoituragePropose;
 	}
@@ -99,8 +115,6 @@ public class User {
 	public void setConducteur(boolean isConducteur) {
 		this.isConducteur = isConducteur;
 	}
-
-
 
 	public Long getId() {
 		return this.id;

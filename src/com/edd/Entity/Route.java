@@ -1,16 +1,40 @@
 package com.edd.Entity;
 
+import java.io.Serializable;
 import java.util.HashMap;
+import java.util.Map;
 
-public class Route {
+import javax.persistence.CollectionTable;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.MapKeyJoinColumn;
 
+@Entity
+public class Route implements Serializable {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 	private int nbParticpant;
-	private HashMap<String, Marker> listeParticipant;
-	private HashMap<Integer, Marker> routeCovoiturage;
+	@ElementCollection
+	@CollectionTable(name="MARKER_PARTICIPANT")
+	@MapKeyJoinColumn(name="NAME")
+	@Column(name="PARTICIPANT")
+	private Map<String, Marker> listeParticipant;
+	@ElementCollection
+	@CollectionTable(name="MARKER_COVOITURAGE")
+	@MapKeyJoinColumn(name="POSITION")
+	@Column(name="POSITIONROUTE")
+	private Map<Integer, Marker> routeCovoiturage;
 	private ConditionsTrajet conditionsCovoiturage;
 	private User conducteur;
 	private Marker depart;
 	private Marker arrivee = Marker.travail;
+
+	private static final long serialVersionUID = 1L;
 
 	public Route(int nbParticpant, ConditionsTrajet conditionsCovoiturage, User conducteur, Marker depart) {
 		this.conditionsCovoiturage = conditionsCovoiturage;
@@ -27,27 +51,31 @@ public class Route {
 
 	}
 
+	public Route(){
+
+	}
+
 	public int getNbParticpant() {
 		return this.nbParticpant;
 	}
 
-	protected void setNbParticpant(int nbParticpant) {
+	public void setNbParticpant(int nbParticpant) {
 		this.nbParticpant = nbParticpant;
 	}
 
-	public HashMap<String, Marker> getListeParticipant() {
+	public Map<String, Marker> getListeParticipant() {
 		return this.listeParticipant;
 	}
 
-	protected void setListeParticipant(HashMap<String, Marker> listeParticipant) {
+	public void setListeParticipant(Map<String, Marker> listeParticipant) {
 		this.listeParticipant = listeParticipant;
 	}
 
-	public HashMap<Integer, Marker> getRouteCovoiturage() {
+	public Map<Integer, Marker> getRouteCovoiturage() {
 		return this.routeCovoiturage;
 	}
 
-	protected void setRouteCovoiturage(HashMap<Integer, Marker> routeCovoiturage) {
+	public void setRouteCovoiturage(Map<Integer, Marker> routeCovoiturage) {
 		this.routeCovoiturage = routeCovoiturage;
 	}
 
@@ -55,7 +83,7 @@ public class Route {
 		return this.conditionsCovoiturage;
 	}
 
-	protected void setConditionsCovoiturage(ConditionsTrajet conditionsCovoiturage) {
+	public void setConditionsCovoiturage(ConditionsTrajet conditionsCovoiturage) {
 		this.conditionsCovoiturage = conditionsCovoiturage;
 	}
 
@@ -63,7 +91,7 @@ public class Route {
 		return this.conducteur;
 	}
 
-	protected void setConducteur(User conducteur) {
+	public void setConducteur(User conducteur) {
 		this.conducteur = conducteur;
 	}
 
@@ -71,7 +99,7 @@ public class Route {
 		return this.depart;
 	}
 
-	protected void setDepart(Marker depart) {
+	public void setDepart(Marker depart) {
 		this.depart = depart;
 	}
 
@@ -79,11 +107,18 @@ public class Route {
 		return this.arrivee;
 	}
 
-	protected void setArrivee(Marker arrivee) {
+	public void setArrivee(Marker arrivee) {
 		this.arrivee = arrivee;
 	}
 
 
+	public Long getId() {
+		return this.id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 
 }

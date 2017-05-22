@@ -1,17 +1,34 @@
 package com.edd.Entity;
 
-public class Adresse {
+import java.io.Serializable;
+
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+
+@Entity
+public class Adresse implements Serializable{
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 	private String voie;
 	private String cp;
 	private String ville;
 	private PAYS pays;
 	private Marker markerAdresse;
 
+	private static final long serialVersionUID = 1L;
+
+	@OneToOne
 	public Marker getMarkerAdresse() {
 		return this.markerAdresse;
 	}
 
-	protected void setMarkerAdresse(Marker markerAdresse) {
+	public void setMarkerAdresse(Marker markerAdresse) {
 		this.markerAdresse = markerAdresse;
 	}
 
@@ -26,6 +43,9 @@ public class Adresse {
 		this.pays = PAYS.FRANCE;
 		this.markerAdresse = new Marker(longitude, lattitude, nomMarker,index, estSelectionne, isConducteur);
 	}
+	public Adresse() {
+	}
+
 
 	public String getVoie() {
 		return this.voie;
@@ -39,25 +59,35 @@ public class Adresse {
 		return this.ville;
 	}
 
+	@Enumerated(EnumType.ORDINAL)
 	public PAYS getPays() {
 		return this.pays;
 	}
 
-	protected void setVoie(String voie) {
+	public void setVoie(String voie) {
 		this.voie = voie;
 	}
 
-	protected void setCp(String cp) {
+	public void setCp(String cp) {
 		this.cp = cp;
 	}
 
-	protected void setVille(String ville) {
+	public void setVille(String ville) {
 		this.ville = ville;
 	}
 
-	protected void setPays(PAYS pays) {
+
+	public void setPays(PAYS pays) {
 		this.pays = pays;
 	}
 
+
+	public Long getId() {
+		return this.id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 }
