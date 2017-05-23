@@ -44,8 +44,8 @@ color:#5e91b2;
 </style>
 
 
-<body onload="initVisuMap();">
-	<div class="container">
+<body >
+	<div class="container" onLoad = "initVisuMap">
 		<form name="myForm">
 			<div class="row">
 				<div class="col-md-3">
@@ -101,23 +101,11 @@ color:#5e91b2;
 		</form>
 	</div>
 	<script type="text/javascript">
-	var table;
-	
 	var Covoitures = [
 		["Laurent Palmier", 43.533329, 1.23333, 0, 0,"Laurent.Palmier@Magnus.fr"],
 		["Sybille Cazaux", 43.6042600, 1.4436700, 1, 0, "Sybille.Cazaux@Magnus.fr"]
 		];
-	var trStart = '<tr>';
-	var trEnd = '</tr>';
-	var tdStart='<td>';
-	var tdEnd='</td>';
 	
-	function AddRow() {
-		for (var i = 0; i < Covoitures.length; i++) {
-			var user = Covoitures[i];
-			$('#myTable').append(trStart + tdStart + user[0] + tdEnd + tdStart + user[5] + tdEnd + tdStart + user[5] + tdEnd + trEnd);
-		}
-	}
 
     }
 	

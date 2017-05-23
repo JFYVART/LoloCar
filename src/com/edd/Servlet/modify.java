@@ -80,6 +80,7 @@ public class modify extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String idUserStr = request.getParameter(Constantes.CHAMP_IDUSERCONNECTED);
+		System.out.println("Identifiant lu :" + this.idUser );
 		if (idUserStr != null){
 			this.idUser = new Long(request.getParameter(Constantes.CHAMP_IDUSERCONNECTED));
 
