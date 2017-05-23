@@ -44,7 +44,7 @@ color:#5e91b2;
 <body>
 	<div class="container">
 		<form name="myForm" method="post" action="register">
-			
+			<input id="idUserConnected" name="idUserConnected" type="hidden"></input>
 			<div class="row">
 				<div class="col-md-3">
 					<c:import url="/WEB-INF/Menu.jsp" />

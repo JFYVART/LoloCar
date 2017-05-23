@@ -41,6 +41,7 @@ public class User implements Serializable {
 
 
 	public User(String nom, String pwd, String email, boolean fumeur, int nbCovoitureurs, String voie, String cp, String ville, double longitude, double lattitude, String nomMarker, int index, boolean isConducteur, boolean estSelectionne) {
+		this.id = 0L;
 		this.name = nom;
 		this.password = pwd;
 		this.email = email;
@@ -115,11 +116,11 @@ public class User implements Serializable {
 		this.covoituragePropose = covoituragePropose;
 	}
 
-	public boolean isConducteur() {
+	public boolean getIsConducteur() {
 		return this.isConducteur;
 	}
 
-	public void setConducteur(boolean isConducteur) {
+	public void setIsConducteur(boolean isConducteur) {
 		this.isConducteur = isConducteur;
 	}
 

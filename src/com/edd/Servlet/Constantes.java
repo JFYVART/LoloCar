@@ -31,7 +31,7 @@ public class Constantes {
 	public static final String CHAMP_ERRORS = "errors";
 	public static final String CHAMP_ERROR_STATUS = "errorStatus";
 	public static final String CHAMP_ERRORCONNECT_STATUS = "errorConnected";
-	public static final String CHAMP_IDUSERCONNECTED = "emailUserToDel";
+	public static final String CHAMP_IDUSERCONNECTED = "idUserConnected";
 
 	// Champs erreurs
 	public static final String CHAMP_ERROR_PWD_AFFICHAGE = "errorPwdHide";

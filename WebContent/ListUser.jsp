@@ -70,7 +70,8 @@ margin-left: -15px;
 
 <body>
 	<div class="container">
-		<form name="myListUser" method="post" action="listeUsers">    	
+		<form name="myListUser" method="post" action="listeUsers">
+		<input id="idUserConnected" name="idUserConnected" type="hidden"></input>	    	
 				<div class="row">
 					<div class="col-md-3">
 							<c:set var = "errorConnected" scope = "session" value = "${false}"/>

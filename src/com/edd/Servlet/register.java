@@ -122,6 +122,8 @@ public class register extends HttpServlet {
 
 		// TODO (inserted by : JFYVART / [11 mai 2017, 13:54:45] Modifier les params fumeurs et nb covoiturerurs !!!!
 		User newUser=new User(this.nom,this.motDePasse1, this.email, false, 1, this.nomMarker, this.nomMarker, this.nomMarker, this.lattitude, this.lattitude, this.nomMarker, this.index, this.estSelectionne, this.estSelectionne);
+
+
 		request.setAttribute("newUser", newUser);
 		System.out.println(newUser.toString());
 		request.setAttribute(Constantes.CHAMP_ERRORCONNECT_STATUS, true);
@@ -218,6 +220,7 @@ public class register extends HttpServlet {
 			if (lastDate != null){
 				msString = msString + ", votre dernière visite était le : " + lastDate;
 			}
+			request.setAttribute(Constantes.CHAMP_IDUSERCONNECTED, UsersDAO.getIdUserConnected(this.email, this.motDePasse1));
 
 			// Création d'un nouveau Cookie date
 			String currentDate=(new Date()).toString();

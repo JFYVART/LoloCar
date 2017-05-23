@@ -7,6 +7,7 @@ import com.edd.Entity.User;
 
 public class UsersDAO {
 	static private ArrayList<User> listeUtilisateur = new ArrayList<User>();
+	static Long idCompteur = 0L;
 	//	static private EntityManagerFactory emf = Persistence.createEntityManagerFactory("LoloCar");
 	//	static private EntityManager em = emf.createEntityManager();
 	//	static private EntityTransaction transaction = em.getTransaction() ;
@@ -28,6 +29,11 @@ public class UsersDAO {
 			return false;
 		}
 
+	}
+
+	static public Long gereId(){
+		idCompteur = idCompteur +1;
+		return idCompteur;
 	}
 
 	static public boolean ajouteUtilisateur(User newUtil) throws Exception {
@@ -60,6 +66,9 @@ public class UsersDAO {
 		}
 		// Si les controles se sont bien passés : On ajoute l'utilisateur
 		if (ajoutPossible) {
+			if (newUtil.getId() == 0L) {
+				newUtil.setId(gereId());
+			}
 			listeUtilisateur.add(newUtil);
 			System.out.println("Ajout du nouvel utilisateur : " + newUtil.getName() + " / " + newUtil.getPassword() + " / " + newUtil.getEmail());
 		}
@@ -72,19 +81,22 @@ public class UsersDAO {
 		if(listeUtilisateur.isEmpty()){
 			try {
 				User newUser1 =new User("Laurent Palmier","123456789", "Laurent.Palmier@Magnus.fr", true, 1,"Place de la mairie", "31470", "Fonsorbes", 43.533329, 1.23333,"Laurent Palmier", 0, false, false);
-
+				newUser1.setId(1L);
 				ajouteUtilisateur(newUser1);
 				System.out.println("user1 :" + newUser1);
 
-				User newUser2 =new User("JF Yvart","123456789", "JF.Yvart@Magnus.fr", true, 1,"8 impasse du Cinsault", "31470", "Saint Lys", 43.51667, 1.2,"",1,true,false );
+				User newUser2 =new User("JF Yvart","123456789", "jf.yvart@Magnus.fr", true, 1,"8 impasse du Cinsault", "31470", "Saint Lys", 43.51667, 1.2,"",1,true,false );
+				newUser2.setId(2L);
 				ajouteUtilisateur(newUser2);
 				System.out.println("user2 :" + newUser2);
 
 				User newUser3 =new User("Sybille Cazaux","123456789", "Sybille.Cazaux@Magnus.fr", false, 1, "Place de la mairie", "31000", "Toulouse", 43.6042600, 1.4436700,"",2,false, false );
+				newUser3.setId(3L);
 				ajouteUtilisateur(newUser3);
 				System.out.println("user3 :" + newUser3);
 
 				User newUser4 =new User("Berger - Levrault","123456789", "help.Covoiturage@Magnus.fr", false, 1, "64 av Edmond Rostand", "31000", "Toulouse", 43.533329, 1.53333,"",3,true, false );
+				newUser4.setId(4L);
 				ajouteUtilisateur(newUser4);
 				System.out.println("user4 :" + newUser4);
 

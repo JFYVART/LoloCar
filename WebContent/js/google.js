@@ -6,6 +6,14 @@ var map, geocoder, marker, marker2; // La carte, le service de géocodage et les
 var ptCheck, depart, arrivee, pos; // point de dÃ©part, arrivÃ© et de vÃ©rification
 var monTrajet = new Array(); // Tableau du trajet
 
+var trStart_Balise = '<tr>';
+var trEnd_Balise = '</tr>';
+var tdStart_Balise ='<td>';
+var tdEnd_Balise='</td>';
+var tdStart_Mail_Balise = '<td onclick="javascript: window.location.href=\'mailto:';
+var tdEnd_Mail_Balise = '?subject=Oboulot : Demande de participation a un covoiturage\';">';
+var glyphicon_Balise = '<span class="glyphicon glyphicon-envelope"></span>';
+
 /* initialise google MAP V3 */
 function initMap() {
 	/* gestion des routes */
@@ -154,50 +162,88 @@ function calcRoute(directionsService, directionsDisplay) {
 		if (status == 'OK') {
 			directionsDisplay.setDirections(result);
 			monTrajet = result.routes[0];
-			utilisateursProcheDuTrajet(monTrajet);
+			utilisateursProcheDuTrajet(monTrajet, 250);
 			}
 	});
 }
 
 
 
-function utilisateursProcheDuTrajet(monTrajet) {
-	var tableauReponse = new Array()
-	var cmpt = 0;
-	for (var i = 0; i < monTrajet.length; i++) {
-		var point = montrajet.overview_path[i];
-		var latPoint = point.K;
-		var longPoint = point.B;
+function utilisateursProcheDuTrajet(monTrajet, distanceRef) {
+    var tableauReponse = new Array();
+    var cmpt = 0;
+    for (var j = 0; j < Users.length; j++) {
+        var user = Users[j];
+        for (var i = 0; i < monTrajet.overview_path.length; i++) {
+            var point = monTrajet.overview_path[i];
+            var latPoint = point.lat();
+            var longPoint = point.lng();
+            var dX = user[1] - latPoint;
+            var dY = user[2] - longPoint;
+            d = Math.sqrt((dX * dX) + (dY * dY)) * 10000;
+            if (d < distanceRef) {
+                // if (d < 500) { //Pour Selectionner Sybille
+                tableauReponse.push(user[0]);
+                user[6] = 1;
+                cmpt = cmpt + 1;
+                addRowTable(user[0],user[5]);
+                break;
+            }
+        }
+    }
+    return tableauReponse;
 
-		for (var j = 0; j < Users.length; j++) {
-			var user = Users[j]; // position: {lat: user[1], lng: user[2]},
+}
 
-			// Calculer la distance Trajet/User[j]
-			var dX;
-			var dY;
-			dX = user[1] - latPoint;
-			dY = user[2] - longPoint;
-			d = Math.sqrt((dX * dX) + (dY * dY));
+function addRowTable(name, email){
+	var ligneToAdd;
+	// En tête de la ligne du tableau <tr>
+	ligneToAdd = trStart_Balise;
+	// Ajout de la première cellule <td> ... </td> : Nom utilisateur sélectionné
+	ligneToAdd = ligneToAdd +  tdStart_Balise + name + tdEnd_Balise 
+	// Ajout de la seconde cellule <td> ... </td> : Email utilisateurs
+	ligneToAdd = ligneToAdd + tdStart_Balise + email + tdEnd_Balise
+	// Ajout de la première cellule <td> ... </td> : Glyphicon enveloppe
+	ligneToAdd = ligneToAdd + tdStart_Mail_Balise + email + tdEnd_Mail_Balise +  glyphicon_Balise + tdEnd_Balise
+	// Ajout de la fin de la ligne du tableau </tr>
+	ligneToAdd = ligneToAdd+  trEnd_Balise;
+	// Ajout de la ligne dans le tableau par Ajax.
+	$('#myTable').append(ligneToAdd);
+}
 
-			// Si cette distance est plus petites que R then mettre ce user[j] dans
-			// le tabeau
-			if (d <= Users[0].rayon) {
-				tableauReponse[cmpt] = User[0];
-				cmpt = cmpt + 1;
-			}
+function distanceUtilisateurTrajet(indiceUtilisateur, monTrajet) {
+    var distanceReponse;
+    var user = Users[indiceUtilisateur];
+    var distanceMinimal;
 
-		}
-	}
-	return tableauReponse;
+    var point = monTrajet.overview_path[0];
+    var latPoint = point.lat();
+    var longPoint = point.lng();
+    var dX = user[1] - latPoint;
+    var dY = user[2] - longPoint
+    distanceMinimal = Math.sqrt((dX * dX) + (dY * dY)) * 10000;
+
+    for (var i = 0; i < monTrajet.overview_path.length; i++) {
+        var point = monTrajet.overview_path[i];
+        var latPoint = point.lat();
+        var longPoint = point.lng();
+        var dX = user[1] - latPoint;
+        var dY = user[2] - longPoint;
+        d = Math.sqrt((dX * dX) + (dY * dY)) * 10000;
+        if (d < distanceMinimal) {
+            distanceMinimal = d;
+        }
+    }
+    return distanceMinimal;
 }
 
 
 // Data for the markers consisting of a name, a LatLng and a zIndex for the
 // order in which these markers should display on top of each other.
 var Users = [
-["Laurent Palmier", 43.533329, 1.23333, 1, 0,"Laurent.Palmier@Magnus.fr"],
-["JF Yvart", 43.51667, 1.2, 2, -1], "JF.Yvart@Magnus.fr",
-["Sybille Cazaux", 43.6042600, 1.4436700, 3, 0, "Sybille.Cazaux@Magnus.fr"]
+["Laurent Palmier", 43.533329, 1.23333, 1, 0,"Laurent.Palmier@Magnus.fr", 0],
+["JF Yvart", 43.51667, 1.2, 2, -1, "JF.Yvart@Magnus.fr", 0],
+["Sybille Cazaux", 43.6042600, 1.4436700, 3, 0, "Sybille.Cazaux@Magnus.fr", 0]
 ];
 
 function setMarkers(map) {
@@ -226,8 +272,16 @@ function setMarkers(map) {
 		coords : [ 1, 1, 1, 20, 18, 20, 18, 1 ],
 		type : 'poly'	
 	};
+	
+	
+	
+	
+	
 	for (var i = 0; i < Users.length; i++) {
 		var user = Users[i];
+		
+		
+		
 		if (user[4] != 0) { 
 		var marker = new google.maps.Marker({
 			position : {
@@ -252,6 +306,7 @@ function setMarkers(map) {
 				label : user[0],
 				zIndex : user[3]
 			});
+			
 		}
 	}
 	
@@ -265,11 +320,25 @@ function setMarkers(map) {
 		label : "Berger-Levrault",
 		zIndex : 99
 	});
+	
+	
 }
+
 
 function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 	infoWindow.setPosition(pos);
 	infoWindow
 			.setContent(browserHasGeolocation ? 'Error: The Geolocation service failed.'
 					: 'Error: Your browser doesn\'t support geolocation.');
+}
+
+
+
+
+function AddRow() {
+	alert('initVisuMap appelé');
+	for (var i = 0; i < Users.length; i++) {
+		var user = Users[i];
+		
+	}
 }
