@@ -54,8 +54,7 @@ color:#5e91b2;
 				</div>
 				<div class="col-md-9">	
 					<div class="col-md-9">
-						<table>
-						<tr>
+						
 							<div class="col-sm-8 input-group">
 								<span class="input-group-addon"><i
 									class="glyphicon glyphicon-flag"></i></span> <input 
@@ -73,27 +72,22 @@ color:#5e91b2;
 							</div>
 							<br>
 								<div class="col-sm-6 form-group">
-								<button class="btn btn-default btn-md col-sm-8" type="submit" value="Recherche" onclick="rechercher()">
+								<button class="btn btn-default btn-md col-sm-8" value="Recherche" onclick="AddRow()">
 									<a style="vertical-align: middle"><span class="glyphicon glyphicon-search"></span></a>
 								</button>
 							</div>
-						</tr>
-						
-						</table>
-						
 						<div id="divMap" style="float:left;width:600px; height:350px"></div>
 						<br>
 							<div class="col-md-9">
-						<table class="table table-hover">
+						<table class="table table-hover" id="myTable">
 						    <thead>
 						      <tr>
 						      <th>Nom</th>
 						      <th>Email</th>
 						      <th>Contacter la personne</th>
 						      </tr>
-						    </thead>
+						    </thead> 
 						    <tbody>
-						      
 						    </tbody>
 					  	</table>
 					  </div>
@@ -113,54 +107,18 @@ color:#5e91b2;
 		["Laurent Palmier", 43.533329, 1.23333, 0, 0,"Laurent.Palmier@Magnus.fr"],
 		["Sybille Cazaux", 43.6042600, 1.4436700, 1, 0, "Sybille.Cazaux@Magnus.fr"]
 		];
+	var trStart = '<tr>';
+	var trEnd = '</tr>';
+	var tdStart='<td>';
+	var tdEnd='</td>';
 	
-	function rechercher(){
-		//if (document.getElementById("data") == null)
-            createTable();
-        //else {
-        //    appendRow();
-        //}
+	function AddRow() {
+		for (var i = 0; i < Covoitures.length; i++) {
+			var user = Covoitures[i];
+			$('#myTable').append(trStart + tdStart + user[0] + tdEnd + tdStart + user[5] + tdEnd + tdStart + user[5] + tdEnd + trEnd);
+		}
 	}
-	
-	function createTable() {
-		alert("createTable");
-        var tbody = document.getElementById("tbody");  //indiv
-        // cells creation
-        for (var j = 0; j <= 3; j++) {
-            // table row creation
-            alert("boucle ligne : " + j);
-            var row = document.createElement("tr");
 
-            for (var i = 0; i < 3; i++) {
-                // create element <td> and text node 
-                //Make text node the contents of <td> element
-                // put <td> at end of the table row
-                alert("boucle ligne : " + j + " - colonne" + i);
-             	var cell = document.createElement("td");    
-                var cellText = document.createTextNode("cell is row "+j+", column "+i); 
-				
-                cell.appendChild(cellText);
-                alert(cellText);
-                row.appendChild(cell);
-            }
-
-            //row added to end of table body
-            tblBody.appendChild(row);
-            alert("ligne ajoutée");
-        }
-    }
-
-    function appendRow() {
-    	var rowCount = Covoitures.length;
-    	for (i = 0; i < rowCount; i++) {
-        	var row = table.insertRow(rowCount);
-            row.insertCell(0).innerHTML = Covoitures[0];
-            row.insertCell(1).innerHTML = Covoitures[4];
-            row.insertCell(2).innerHTML = Covoitures[4];
-            alert(Covoitures[0] + Covoitures[4] );
-        }
-        
-        
     }
 	
 	</script>

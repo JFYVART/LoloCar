@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.edd.DAO.UsersDAO;
+import com.edd.Entity.User;
 
 
 @WebServlet("/connect")
@@ -25,6 +26,8 @@ public class connect extends HttpServlet {
 	// Champs USER
 	private String motDePasse1;
 	private String email;
+	private User monUser;
+	private Long idUser = 0L;
 
 	private final String URL_NAME = "WEB-INF/ConnectUser.jsp";
 
@@ -48,6 +51,7 @@ public class connect extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		request.setAttribute(Constantes.CHAMP_IDUSERCONNECTED,0);
 		/* Récupération des champs du formulaire. */
 		request.setAttribute(Constantes.CHAMP_MSG_UTIL_AFFICHAGE, Constantes.MSG_AFFICHAGE_HIDDEN);
 		// On remplit le dom avec les nouveaux attributs !!!
@@ -94,26 +98,23 @@ public class connect extends HttpServlet {
 		request.setAttribute(Constantes.CHAMP_IDUSERCONNECTED, 0);
 
 
-		if (!reponseOk){
-			this.errors.put(Constantes.CHAMP_PASS1, "couple (Login / password) inconnu");
-			request.setAttribute(Constantes.CHAMP_ERROR_PWD_AFFICHAGE, Constantes.MSG_AFFICHAGE_VISIBLE);
-			request.setAttribute(Constantes.CHAMP_ERROR_EMAIL_AFFICHAGE, Constantes.MSG_AFFICHAGE_VISIBLE);
-			request.setAttribute(Constantes.CHAMP_ERROR_STATUS, true);
-			request.setAttribute(Constantes.CHAMP_ERRORCONNECT_STATUS, true);
-			msString ="couple (Login / password) inconnu";
-			request.getRequestDispatcher(this.URL_NAME).forward(request, response);
-		} else {
-			request.setAttribute(Constantes.CHAMP_IDUSERCONNECTED, UsersDAO.getIdUserConnected(this.email, this.motDePasse1));
+		if (reponseOk){
+			this.idUser = UsersDAO.getIdUserConnected(this.email, this.motDePasse1);
+			System.out.println("idUser connecté :" + this.idUser);
+			request.setAttribute(Constantes.CHAMP_IDUSERCONNECTED,this.idUser );
 			request.setAttribute(Constantes.CHAMP_ERRORCONNECT_STATUS, false);
+		} else {
+			request.setAttribute(Constantes.CHAMP_ERROR_PWD_AFFICHAGE, Constantes.MSG_AFFICHAGE_VISIBLE);
+			msString = "Login ou mot de passe non reconnu !!!";
+			request.setAttribute(Constantes.CHAMP_ERRORCONNECT_STATUS, true);
 		}
-
 		System.out.println(msString);
 		request.setAttribute(Constantes.CHAMP_MSG_UTIL, msString);
 		request.setAttribute(Constantes.CHAMP_MSG_UTIL_AFFICHAGE, Constantes.MSG_AFFICHAGE_VISIBLE);
 		//		request.setAttribute("pwdValidated", pwdValidated);
 
 		// Ouverture de la page Welcome
-		request.getRequestDispatcher(this.URL_NAME).forward(request, response);
+		request.getRequestDispatcher(this.URL_NAME + "?" + Constantes.CHAMP_IDUSERCONNECTED + this.idUser ).forward(request, response);
 
 	}
 

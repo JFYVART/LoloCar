@@ -51,10 +51,13 @@ public class modify extends HttpServlet {
 	private boolean estSelectionne;
 
 	private final String URL_NAME = "WEB-INF/ModifyUser.jsp";
+	private final String URL_NAME_Acueil = "Index.jsp";
 
 	private Cookie[] allCookies;
 
 	String teString;
+	Long idUser = 0L;
+	User userSearched;
 
 	Map<String, String> errors = new HashMap<String, String>();
 	Map<String, String> form = new HashMap<String, String>();
@@ -76,6 +79,19 @@ public class modify extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		String idUserStr = request.getParameter(Constantes.CHAMP_IDUSERCONNECTED);
+		if (idUserStr != null){
+			this.idUser = new Long(request.getParameter(Constantes.CHAMP_IDUSERCONNECTED));
+
+		}
+		else{
+			this.idUser = 2L;
+			this.userSearched = UsersDAO.getUserById(this.idUser);
+		}
+
+		System.out.println("Identifiant lu :" + this.idUser );
+		request.setAttribute(Constantes.CHAMP_ERRORCONNECT_STATUS,false);
+		request.setAttribute("newUser", this.userSearched);
 		/* Récupération des champs du formulaire. */
 		request.setAttribute(Constantes.CHAMP_MSG_UTIL_AFFICHAGE, Constantes.MSG_AFFICHAGE_HIDDEN);
 		// On remplit le dom avec les nouveaux attributs !!!
@@ -96,17 +112,13 @@ public class modify extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		/* Récupération de l'id. */
-		Long idUser = new Long(request.getParameter(Constantes.CHAMP_IDUSERCONNECTED));
-
-		User userSearched = UsersDAO.getUserById(idUser);
-		request.setAttribute("newUser", userSearched);
+		request.setAttribute("newUser", this.userSearched);
 
 		// Remplissage du hashmap  form
-		this.form.put(Constantes.CHAMP_EMAIL, userSearched.getEmail());
-		this.form.put(Constantes.CHAMP_NOM, userSearched.getName());
-		this.form.put(Constantes.CHAMP_NOM, userSearched.getName());
-		request.setAttribute(Constantes.CHAMP_ERROR_STATUS, true);
+		this.form.put(Constantes.CHAMP_EMAIL, this.userSearched.getEmail());
+		this.form.put(Constantes.CHAMP_NOM, this.userSearched.getName());
+		this.form.put(Constantes.CHAMP_NOM, this.userSearched.getName());
+		request.setAttribute(Constantes.CHAMP_ERRORCONNECT_STATUS,false);
 
 		// Réinit des erreurs.
 		this.errors = new HashMap<String, String>();
@@ -143,7 +155,7 @@ public class modify extends HttpServlet {
 		request.setAttribute(Constantes.CHAMP_ERRORS, this.errors);
 
 		try {
-			userDeleted = UsersDAO.deleteUser(userSearched.getName());
+			userDeleted = UsersDAO.deleteUser(this.userSearched.getName());
 		} catch (Exception e) {
 			this.errors.put(Constantes.CHAMP_PASS1, e.getMessage());
 			request.setAttribute(Constantes.CHAMP_ERROR_PWD_AFFICHAGE, Constantes.MSG_AFFICHAGE_VISIBLE);
@@ -155,7 +167,7 @@ public class modify extends HttpServlet {
 
 		if (userDeleted) {
 			msString = "Votre compte vient d'être supprimé.";
-
+			request.setAttribute(Constantes.CHAMP_ERRORCONNECT_STATUS,true);
 			// Création d'un nouveau Cookie date
 			String currentDate=(new Date()).toString();
 			Cookie myCookie=new Cookie(Constantes.DATE_COOKIE_KEY+"_" + this.nom, URLEncoder.encode(currentDate, "UTF-8"));
@@ -165,16 +177,22 @@ public class modify extends HttpServlet {
 			myCookie = new Cookie(Constantes.COUNT_COOKIE_KEY+"_" + this.nom , "" + compteur);
 			response.addCookie(myCookie);
 			request.setAttribute(Constantes.CHAMP_ERROR_STATUS, false);
+			System.out.println(msString);
+			request.setAttribute(Constantes.CHAMP_MSG_UTIL, msString);
+			request.setAttribute(Constantes.CHAMP_MSG_UTIL_AFFICHAGE, Constantes.MSG_AFFICHAGE_VISIBLE);
+			// Ouverture de la page Welcome
+			request.getRequestDispatcher(this.URL_NAME).forward(request, response);
 
+		} else {
+			msString = "Impossible de supprimer le compte";
+			System.out.println(msString);
+			request.setAttribute(Constantes.CHAMP_MSG_UTIL, msString);
+			request.setAttribute(Constantes.CHAMP_MSG_UTIL_AFFICHAGE, Constantes.MSG_AFFICHAGE_VISIBLE);
+			//		request.setAttribute("pwdValidated", pwdValidated);
+
+			// Ouverture de la page Welcome
+			request.getRequestDispatcher(this.URL_NAME).forward(request, response);
 		}
-
-		System.out.println(msString);
-		request.setAttribute(Constantes.CHAMP_MSG_UTIL, msString);
-		request.setAttribute(Constantes.CHAMP_MSG_UTIL_AFFICHAGE, Constantes.MSG_AFFICHAGE_VISIBLE);
-		//		request.setAttribute("pwdValidated", pwdValidated);
-
-		// Ouverture de la page Welcome
-		request.getRequestDispatcher(this.URL_NAME).forward(request, response);
 
 	}
 

@@ -91,7 +91,7 @@ h4 {
 <body>
 	<div class="container">
 		<form name="myForm" method="post" action="modify">
-		<input id="emailUserToDel" name="emailUserToDel" type="hidden"></input>	
+		<input id="idUserConnected" name="idUserConnected" type="hidden"></input>
 			<div class="row">
 				<div class="col-md-3">
 					<c:set var = "errorConnected" scope = "session" value = "${false}"/>
@@ -102,12 +102,14 @@ h4 {
 					<c:import url="/WEB-INF/Card.jsp" />
 					
 					<div class="container bg-grey">
-						<div class="row">
+					<c:set var = "idUserConnected" scope = "session" value = "${true}"/>
+					<c:if test="${!errorConnected}">
+  						<div class="row">
 							<p></p>
 							<div class="col-sm-12">
 								<div class="row" id="btnGrp">
 									<div class="col-sm-6 form-group">
-										<button class="btn btn-default btn-md col-sm-8" type="submit">
+										<button class="btn btn-default btn-md col-sm-8" type="submit"">
 											<a style="vertical-align: middle"><span
 												class="glyphicon glyphicon-remove"></span></a>
 										</button>
@@ -115,6 +117,12 @@ h4 {
 								</div>
 							</div>
 						</div>
+        			</c:if>	
+					
+					
+					
+					
+						
 					</div>
 				</div>
 				
