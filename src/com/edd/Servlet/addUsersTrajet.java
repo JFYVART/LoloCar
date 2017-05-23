@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.edd.DAO.UsersDAO;
+import com.edd.DAO.UserTrajetDAO;
 import com.edd.Entity.User;
 
 /**
@@ -25,17 +25,14 @@ public class addUsersTrajet extends HttpServlet {
 
 	public static final String CHAMP_EMAIL = "emailUtilisateur";
 	public static final String CHAMP_EMAILTOADD = "emailUserToAdd";
-	private String emailtoadd;
-	private String email;
-	public static final String CHAMP_MSG_AJOUT = "ajoutUtilisateur";
-	public static final String CHAMP_MSG_UTIL_AFFICHAGE = "msgHide";
-
-
-	public static final String MSG_AFFICHAGE_VISIBLE = "bg-success col-sm-12";
-	public static final String MSG_AFFICHAGE_HIDDEN = "hidden";
 	
-	HashMap<String, User> Users = new HashMap<String, User>();
-       
+	public static final String CHAMP_EMAILTODEL = "emailUserToDel";
+	private String emailtoadd;
+	private String emailtodel;
+	private String email;
+
+	
+      
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -49,9 +46,11 @@ public class addUsersTrajet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		/* Récupération des champs du formulaire. */
-		this.Users = UsersDAO.fillHashMapWithListUsers("");
-		request.setAttribute("users", this.Users);
-		System.out.println("remplissage");
+		UserTrajetDAO.initListeUserHaut();
+		
+		request.setAttribute("usershaut", UserTrajetDAO.getListeUtilisateurTrajetHaut());		
+		
+		request.setAttribute("usersbas",UserTrajetDAO.getListeUtilisateurTrajetBas());		
 		PrintWriter out = response.getWriter();
 		// Ouverture de la page ListUsers
 		request.getRequestDispatcher(this.URL_NAME).forward(request, response);
@@ -64,15 +63,22 @@ public class addUsersTrajet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		/* Récupération des champs du formulaire. */
 		System.out.println("test post");
-		
+	
 		this.emailtoadd = request.getParameter(CHAMP_EMAILTOADD);
-		request.setAttribute(CHAMP_EMAILTOADD, this.emailtoadd);
-		UsersDAO.deleteUser(this.emailtoadd);
-		System.out.println("liste a supprimer :" + this.emailtoadd);
-		this.Users = UsersDAO.fillHashMapWithListUsers("");
-
-		request.setAttribute("users", this.Users);
-		System.out.println("post list :" + this.Users);
+		request.setAttribute(CHAMP_EMAILTOADD, this.emailtoadd);	
+		
+		this.emailtodel = request.getParameter(CHAMP_EMAILTODEL);
+		request.setAttribute(CHAMP_EMAILTODEL, this.emailtodel);	
+			
+		
+		UserTrajetDAO.addToUserBas(this.emailtoadd);
+		UserTrajetDAO.deleteUserHaut(this.emailtoadd);	
+		System.out.println("post mail à ajouter en haut par suppression :" + this.emailtodel);
+		UserTrajetDAO.addToUserHaut(this.emailtodel);
+		UserTrajetDAO.deleteUserBas(this.emailtodel);	
+		
+		request.setAttribute("usershaut", UserTrajetDAO.getListeUtilisateurTrajetHaut());
+		request.setAttribute("usersbas", UserTrajetDAO.getListeUtilisateurTrajetBas());
 		PrintWriter out = response.getWriter();
 		// Ouverture de la page ListUsers
 		request.getRequestDispatcher(this.URL_NAME).forward(request, response);

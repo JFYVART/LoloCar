@@ -64,6 +64,10 @@ margin-left: -15px;
  color:#5e91b2;
  font-size: 12px;
  }
+ 
+#Titre{
+	color:#5e91b2;
+}
 
 </style>
 
@@ -72,28 +76,17 @@ margin-left: -15px;
 	<div class="container">
 		<form id="form" name="myListUser" method="post" action="addUsersTrajet">
 		<input id="emailUserToAdd" name="emailUserToAdd" type="hidden"></input>	
+		<input id="emailUserToDel" name="emailUserToDel" type="hidden"></input>		
 				<div class="row">
+				   
 					<div class="col-md-3">
 							<c:set var = "errorConnected" scope = "session" value = "${false}"/>
 							<c:import url="/WEB-INF/Menu.jsp" />
 					</div>
-					<div class="col-md-9">
-						<div class="row">
-							<div class="col-sm-6 input-group">
-								<span class="input-group-addon"><i
-									class="glyphicon glyphicon-screenshot"></i></span><input 
-									class="form-control" id=emailUtilisateur type="text"
-									name="emailUtilisateur" value="${emailUtilisateur}" placeholder="Utilisateur recherché">
-							</div>
-						<br>			
-						<div class="col-sm-6">
-								<button class="btn btn-default btn-md col-sm-6" type="submit">
-									<a style="vertical-align: middle"><span class="glyphicon glyphicon-search"></span></a>
-								</button>
-						</div>
-					</div>
 					<br>
+					
 					<div class="col-md-9">
+					<h3 id = "Titre">Gestion du trajet</h3>
 						<table class="table table-hover">
 						    <thead>
 						      <tr>
@@ -103,11 +96,11 @@ margin-left: -15px;
 						      </tr>
 						    </thead>
 						    <tbody>
-						      <c:forEach var="userItem" items="${users}">
+						      <c:forEach var="userItem" items="${usershaut}">
      								<tr>
-          								<td><c:out value="${userItem.value.name}"/></td>
-          								<td><c:out value="${userItem.value.email}" /></td>
-          								<td onclick="add('${userItem.value.email}')"><c:out value='${user.email}'/><span class=" glyphicon glyphicon-plus"></span></td>
+          								<td><c:out value="${userItem.name}"/></td>
+          								<td><c:out value="${userItem.email}" /></td>
+          								<td onclick="add('${userItem.email}')"><c:out value='${user.email}'/><span class=" glyphicon glyphicon-plus"></span></td>
           							</tr>	
      							</c:forEach>
 						    </tbody>
@@ -124,11 +117,11 @@ margin-left: -15px;
 						      </tr>
 						    </thead>
 						    <tbody>
-						      <c:forEach var="userItem" items="${users}">
+						      <c:forEach var="userItem" items="${usersbas}">
      								<tr>
-          								<td><c:out value="${userItem.value.name}"/></td>
-          								<td><c:out value="${userItem.value.email}" /></td>
-          								<td onclick="location.href='delUser?emailUserToDel='"><c:out value='${user.email}'/><span class=" glyphicon glyphicon-remove"></span></td>
+          								<td><c:out value="${userItem.name}"/></td>
+          								<td><c:out value="${userItem.email}" /></td>
+          								<td onclick="del('${userItem.email}')"><c:out value='${user.email}'/><span class=" glyphicon glyphicon-remove"></span></td>
           							</tr>	
      							</c:forEach>
 						    </tbody>
@@ -142,6 +135,10 @@ margin-left: -15px;
 	<script type="text/javascript">
 	function add(email){
 	    document.getElementById("emailUserToAdd").value=email;
+	    document.getElementById("form").submit();
+	}
+	function del(email){
+		document.getElementById("emailUserToDel").value=email;
 	    document.getElementById("form").submit();
 	}
 	</script>
