@@ -6,10 +6,13 @@ var map, geocoder, marker, marker2; // La carte, le service de géocodage et les
 var ptCheck, depart, arrivee, pos; // point de dÃ©part, arrivÃ© et de vÃ©rification
 var monTrajet = new Array(); // Tableau du trajet
 
-var trStart = '<tr>';
-var trEnd = '</tr>';
-var tdStart='<td>';
-var tdEnd='</td>';
+var trStart_Balise = '<tr>';
+var trEnd_Balise = '</tr>';
+var tdStart_Balise ='<td>';
+var tdEnd_Balise='</td>';
+var tdStart_Mail_Balise = '<td onclick="javascript: window.location.href=\'mailto:';
+var tdEnd_Mail_Balise = '?subject=Oboulot : Demande de participation a un covoiturage\';">';
+var glyphicon_Balise = '<span class="glyphicon glyphicon-envelope"></span>';
 
 /* initialise google MAP V3 */
 function initMap() {
@@ -183,13 +186,29 @@ function utilisateursProcheDuTrajet(monTrajet, distanceRef) {
                 tableauReponse.push(user[0]);
                 user[6] = 1;
                 cmpt = cmpt + 1;
-                $('#myTable').append(trStart + tdStart + user[0] + tdEnd + tdStart + user[5] + tdEnd + tdStart + user[5] + tdEnd + trEnd);
+                addRowTable(user[0],user[5]);
                 break;
             }
         }
     }
     return tableauReponse;
 
+}
+
+function addRowTable(name, email){
+	var ligneToAdd;
+	// En tête de la ligne du tableau <tr>
+	ligneToAdd = trStart_Balise;
+	// Ajout de la première cellule <td> ... </td> : Nom utilisateur sélectionné
+	ligneToAdd = ligneToAdd +  tdStart_Balise + name + tdEnd_Balise 
+	// Ajout de la seconde cellule <td> ... </td> : Email utilisateurs
+	ligneToAdd = ligneToAdd + tdStart_Balise + email + tdEnd_Balise
+	// Ajout de la première cellule <td> ... </td> : Glyphicon enveloppe
+	ligneToAdd = ligneToAdd + tdStart_Mail_Balise + email + tdEnd_Mail_Balise +  glyphicon_Balise + tdEnd_Balise
+	// Ajout de la fin de la ligne du tableau </tr>
+	ligneToAdd = ligneToAdd+  trEnd_Balise;
+	// Ajout de la ligne dans le tableau par Ajax.
+	$('#myTable').append(ligneToAdd);
 }
 
 function distanceUtilisateurTrajet(indiceUtilisateur, monTrajet) {
