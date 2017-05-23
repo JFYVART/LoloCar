@@ -96,7 +96,7 @@ margin-bottom : -5px;
 				<div class="container-fluid bg-grey">
 				<h2 class="text-center col-sm-12">
 					<div class="well">
-					<i class="glyphicon glyphicon-globe"></i>
+					<img src="img/LoloCar.png" class="img-thumbnail"  width="160" height="160">
 					Covoiturage with LoloCar !!!
 					</div>
 				</h2>

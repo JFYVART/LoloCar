@@ -254,15 +254,40 @@ function setMarkers(map) {
 
 	// Origins, anchor positions and coordinates of the marker increase in the X
 	// direction to the right and in the Y direction down.
-	var image = {
-		url : 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
+	var imageConducteur = {
+		//url : 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
+			url : 'img/Conducteur.png',
 		// This marker is 20 pixels wide by 32 pixels high.
-		size : new google.maps.Size(20, 32),
+		size : new google.maps.Size(18,32),
 		// The origin for this image is (0, 0).
 		origin : new google.maps.Point(0, 0),
 		// The anchor for this image is the base of the flagpole at (0, 32).
 		anchor : new google.maps.Point(0, 32)
 	};
+	
+	
+	var imagePassager = {
+			//url : 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
+				url : 'img/Passager.png',
+			// This marker is 20 pixels wide by 32 pixels high.
+			size : new google.maps.Size(20, 20),
+			// The origin for this image is (0, 0).
+			origin : new google.maps.Point(0, 0),
+			// The anchor for this image is the base of the flagpole at (0, 32).
+			anchor : new google.maps.Point(0, 32)
+		};
+	
+	var imageTravail = {
+			//url : 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
+				url : 'img/Travail.png',
+			// This marker is 20 pixels wide by 32 pixels high.
+			size : new google.maps.Size(20, 20),
+			// The origin for this image is (0, 0).
+			origin : new google.maps.Point(0, 0),
+			// The anchor for this image is the base of the flagpole at (0, 32).
+			anchor : new google.maps.Point(0, 32)
+		};
+	
 	// Shapes define the clickable region of the icon. The type defines an HTML
 	// <area> element 'poly' which traces out a polygon as a series of X,Y
 	// points.
@@ -289,6 +314,7 @@ function setMarkers(map) {
 				lng : user[2]
 			},
 			map : map,
+			icon : imageConducteur,
 			shape : shape,
 			label : user[0],
 			zIndex : user[3]
@@ -301,7 +327,7 @@ function setMarkers(map) {
 					lng : user[2]
 				},
 				map : map,
-				icon : image,
+				icon : imagePassager,
 				shape : shape,
 				label : user[0],
 				zIndex : user[3]
